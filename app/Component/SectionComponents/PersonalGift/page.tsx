@@ -14,6 +14,9 @@ import {
   whiteBook,
   photoFrame,
   Caricurate,
+  Journal,
+  Fragrance,
+  Magnets,
 
   cards,
   // matchBox,
@@ -32,7 +35,7 @@ export default function GiftFinder() {
 
   const occasions = ['Birthday', 'Anniversary', 'Valentine', 'Wedding', 'Congratulations', 'Just Because']
   const recipients = ['Him', 'Her', 'Friend', 'Family', 'Colleague']
-  const types = ['Personalized Novels', 'Gratitude Reminder', 'Magzine', 'Desk Calender','Wallet Card','White Book', 'Photo Frame' ,'Caricurate']
+  const types = ['Personalized Novels', 'Gratitude Reminder', 'Magzine', 'Desk Calender','Wallet Card','White Book', 'Photo Frame' ,'Caricurate','Gratitude Journal','Fragrance','Fridge Magnet']
 
 //  const handleProductClick = (product: Product) => {
 //         const query = new URLSearchParams({
@@ -162,6 +165,60 @@ export default function GiftFinder() {
 
         router.push(`/Component/ParticularProduct5?${query}`);
     };
+    const handleProductClick6 = (product: Product) => {
+        const query = new URLSearchParams({
+            id: product.id,
+          image: product.image,
+          image2: product.image2, // Since your Product interface only has one image
+          image3: product.image3, // Since your Product interface only has one image
+          title: product.title,
+          price: product.price.toString(), // Convert number to string
+          description: product.description,
+          description2: product.description2,
+          description3: product.description3,
+          description4: product.description4,
+          inside1: product.inside1,
+          inside2: product.inside2,
+          inside3: product.inside3,
+          inside4: product.inside4,
+          inside5: product.inside5,
+          inside6: product.inside6,
+    
+          loveit1: product.loveit1,
+          loveit2: product.loveit2,
+          loveit3: product.loveit3,
+          loveit4: product.loveit4,
+        }).toString();
+
+        router.push(`/Component/ParticularProduct6?${query}`);
+    };
+     const handleProductClick7 = (product: Product) => {
+        const query = new URLSearchParams({
+            id: product.id,
+          image: product.image,
+          image2: product.image2, // Since your Product interface only has one image
+          image3: product.image3, // Since your Product interface only has one image
+          title: product.title,
+          price: product.price.toString(), // Convert number to string
+          description: product.description,
+          description2: product.description2,
+          description3: product.description3,
+          description4: product.description4,
+          inside1: product.inside1,
+          inside2: product.inside2,
+          inside3: product.inside3,
+          inside4: product.inside4,
+          inside5: product.inside5,
+          inside6: product.inside6,
+    
+          loveit1: product.loveit1,
+          loveit2: product.loveit2,
+          loveit3: product.loveit3,
+          loveit4: product.loveit4,
+        }).toString();
+
+        router.push(`/Component/ParticularProduct7?${query}`);
+    };
 
     const handleCardClick = (product: Product) => {
         // Check if product ID starts with 'm'
@@ -172,6 +229,14 @@ export default function GiftFinder() {
         } 
         else if(product.id.toLowerCase().startsWith('pf')){
           handleProductClick5(product)
+        } 
+
+        else if(product.id.toLowerCase().startsWith('wb')){
+          handleProductClick6(product)
+        } 
+
+        else if(product.id.toLowerCase().startsWith('mag')){
+          handleProductClick7(product)
         } 
         
         else {
@@ -204,6 +269,18 @@ export default function GiftFinder() {
     }
     else if (selectedType === 'Caricurate') {
       categoryProducts = Caricurate
+    }
+
+    else if (selectedType === 'Gratitude Journal') {
+      categoryProducts = Journal
+    }
+
+    else if (selectedType === 'Fragrance') {
+      categoryProducts = Fragrance
+    }
+
+    else if (selectedType === 'Fridge Magnet') {
+      categoryProducts = Magnets
     }
    
 

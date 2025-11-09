@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Fragrance, type Product } from '@/lib/data/products';
+import { Magnets, type Product } from '@/lib/data/products';
 import { Heart, Send, Sparkles, BookOpen, PenTool } from 'lucide-react';
 import Navbar from '@/components/navbar';
 
@@ -35,7 +35,7 @@ export default function CardsPage() {
 
     }).toString();
 
-    router.push(`/Component/ParticularProduct3?${query}`);
+    router.push(`/Component/ParticularProduct7?${query}`);
   };
 
   return (
@@ -89,7 +89,7 @@ export default function CardsPage() {
             {/* Right Image */}
             <div className="relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src="/LogoPics/fargnance.jpg"
+                src="/LogoPics/magnet.jpg"
                 alt="Personalized Custom Notebook"
                 fill
                 className="object-cover"
@@ -120,7 +120,7 @@ export default function CardsPage() {
 
           {/* Products Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {Fragrance.map((product) => (
+            {Magnets.map((product) => (
               <div
                 key={product.id}
                 onClick={() => gotoParticularProduct(product)}
@@ -157,7 +157,7 @@ export default function CardsPage() {
                   </div>
 
                   {/* Wishlist Button */}
-                  <button
+                  {/* <button
                     onClick={(e) => {
                       e.stopPropagation();
                       // Add wishlist logic here
@@ -165,7 +165,7 @@ export default function CardsPage() {
                     className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-colors group/wishlist"
                   >
                     <Heart className="w-5 h-5 text-gray-700 group-hover/wishlist:text-pink-500 transition-colors" />
-                  </button>
+                  </button> */}
                 </div>
 
                 {/* Content Section */}

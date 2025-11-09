@@ -21,7 +21,9 @@ import {
 
 import "../../../public/ShopbyCategories/Category 2_ Gratitude Reminders/1.jpg"
 import "../../../public/ShopbyCategories/Category 5_ Personalized Desk Calendar/1.jpg"
-import "../../../public/ShopbyCategories/Category 6_ Wallet Card/1.jpg"
+import "../../../public/LogoPics/fargnance.jpg"
+import "../../../public/LogoPics/journal.jpg"
+import "../../../public/LogoPics/magnet.jpg"
 
 export interface Product {
     id: string;
@@ -243,6 +245,7 @@ const HomePage = () => {
     // Category data
 
     const categories = [
+        { name: "Gratitude Journal", image: "/LogoPics/journal.jpg", path: "/Component/CategoryNew/GratitudeJournal" },
         { name: "Personalized Novels", image: "/LogoPics/Novel.jpg", path: "/Component/Category/MemoryBook" },
         { name: "Gratitude Reminder", image: "/LogoPics/Gratitude.jpg", path: "/Component/CategoryNew/GratitudeRemainder" },
         { name: "Magzine", image: "/LogoPics/Magzine.jpg", path: "/Component/CategoryNew/Magzine" },
@@ -251,7 +254,8 @@ const HomePage = () => {
         { name: "White Book", image: "/LogoPics/WhteBook.jpg", path: "/Component/CategoryNew/WhiteBook" },
         { name: "Personalized Frames", image: "/LogoPics/frames.jpg", path: "/Component/CategoryNew/PersonalizedFrame" },
         { name: "Caricurate", image: "/LogoPics/Circulate.jpg", path: "/Component/CategoryNew/Caricurate" },
-        // { name: "Fragrance", image: "/LogoPics/Circulate.jpg", path: "/Component/CategoryNew/Fragrance" },
+        { name: "Fragrance", image: "/LogoPics/fargnance.jpg", path: "/Component/CategoryNew/Fragrance" },
+        { name: "Fridge Magnet", image: "/LogoPics/magnet.jpg", path: "/Component/CategoryNew/FridgeMagnet" },
     ];
 
     // Products data - Using your structure

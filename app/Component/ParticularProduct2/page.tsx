@@ -102,7 +102,7 @@ function ProductContent() {
       case 50:
         return basePrice;
       case 100:
-        return basePrice + 200;
+        return basePrice + 600;
       case 200:
         return basePrice + 300;
       default:

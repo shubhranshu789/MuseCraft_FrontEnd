@@ -3,8 +3,8 @@
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Fragrance, type Product } from '@/lib/data/products';
-import { Heart, Send, Sparkles, BookOpen, PenTool } from 'lucide-react';
+import { Journal, type Product } from '@/lib/data/products';
+import { Heart, Send, Sparkles } from 'lucide-react';
 import Navbar from '@/components/navbar';
 
 export default function CardsPage() {
@@ -32,7 +32,7 @@ export default function CardsPage() {
       loveit2: product.loveit2,
       loveit3: product.loveit3,
       loveit4: product.loveit4,
-
+      
     }).toString();
 
     router.push(`/Component/ParticularProduct3?${query}`);
@@ -41,7 +41,7 @@ export default function CardsPage() {
   return (
     <div className="min-h-screen bg-[#e8e4df]">
       <Navbar />
-
+      
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[#d4cfc7] to-[#e8e4df] py-20 px-4 overflow-hidden">
         <div className="max-w-7xl mx-auto">
@@ -49,17 +49,18 @@ export default function CardsPage() {
             {/* Left Content */}
             <div className="space-y-6">
               <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
-                Your Thoughts
-                <span className="block text-gray-700">Deserve a Beautiful Canvas</span>
+                Send Love with
+                <span className="block text-gray-700">Handcrafted Cards</span>
               </h1>
-
+              
               <p className="text-lg text-gray-600 leading-relaxed">
-                Premium personalized notebooks and journals with custom covers. Perfect for capturing ideas, dreams, and daily reflections in style.
+                Make every occasion memorable with our beautifully designed greeting cards. 
+                Handcrafted with love, personalized with care.
               </p>
 
               <div className="flex flex-wrap gap-4 pt-4">
                 <button className="bg-gray-900 text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-all duration-200 shadow-lg hover:shadow-xl">
-                  Design Your Notebook
+                  Browse Cards
                 </button>
               </div>
 
@@ -67,21 +68,21 @@ export default function CardsPage() {
               <div className="grid grid-cols-3 gap-4 pt-8">
                 <div className="text-center">
                   <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2 shadow-md">
-                    <BookOpen className="w-8 h-8 text-blue-600" />
+                    <Heart className="w-8 h-8 text-pink-600" />
                   </div>
-                  <p className="text-sm font-medium text-gray-700">Premium Pages</p>
+                  <p className="text-sm font-medium text-gray-700">Heartfelt</p>
                 </div>
                 <div className="text-center">
                   <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2 shadow-md">
                     <Sparkles className="w-8 h-8 text-purple-600" />
                   </div>
-                  <p className="text-sm font-medium text-gray-700">Custom Cover</p>
+                  <p className="text-sm font-medium text-gray-700">Unique</p>
                 </div>
                 <div className="text-center">
                   <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2 shadow-md">
-                    <PenTool className="w-8 h-8 text-amber-600" />
+                    <Send className="w-8 h-8 text-blue-600" />
                   </div>
-                  <p className="text-sm font-medium text-gray-700">Versatile</p>
+                  <p className="text-sm font-medium text-gray-700">Memorable</p>
                 </div>
               </div>
             </div>
@@ -89,8 +90,8 @@ export default function CardsPage() {
             {/* Right Image */}
             <div className="relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src="/LogoPics/fargnance.jpg"
-                alt="Personalized Custom Notebook"
+                src="/LogoPics/journal.jpg"
+                alt="Handcrafted Cards Hero"
                 fill
                 className="object-cover"
                 priority
@@ -101,26 +102,24 @@ export default function CardsPage() {
         </div>
 
         {/* Decorative Elements */}
-        <div className="absolute top-10 right-10 w-32 h-32 bg-blue-300/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 left-10 w-40 h-40 bg-slate-300/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-10 right-10 w-32 h-32 bg-pink-300/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 left-10 w-40 h-40 bg-purple-300/20 rounded-full blur-3xl"></div>
       </section>
-
 
       {/* Products Section */}
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Notebook Collection</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Card Collection</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Premium personalized notebooks and journals for capturing your thoughts in style
+              Discover beautifully crafted greeting cards for every occasion and emotion
             </p>
           </div>
 
-
           {/* Products Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {Fragrance.map((product) => (
+            {Journal.map((product) => (
               <div
                 key={product.id}
                 onClick={() => gotoParticularProduct(product)}
@@ -135,7 +134,7 @@ export default function CardsPage() {
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
-
+                  
                   {/* Badges */}
                   <div className="absolute top-4 right-4 flex flex-col gap-2">
                     {product.discount > 0 && (
@@ -157,7 +156,7 @@ export default function CardsPage() {
                   </div>
 
                   {/* Wishlist Button */}
-                  <button
+                  {/* <button 
                     onClick={(e) => {
                       e.stopPropagation();
                       // Add wishlist logic here
@@ -165,7 +164,7 @@ export default function CardsPage() {
                     className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-colors group/wishlist"
                   >
                     <Heart className="w-5 h-5 text-gray-700 group-hover/wishlist:text-pink-500 transition-colors" />
-                  </button>
+                  </button> */}
                 </div>
 
                 {/* Content Section */}
@@ -173,7 +172,7 @@ export default function CardsPage() {
                   <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
                     {product.title}
                   </h3>
-
+                  
                   <p className="text-sm text-gray-600 mb-4 line-clamp-2">
                     {product.description}
                   </p>
@@ -215,7 +214,7 @@ export default function CardsPage() {
         </div>
       </section>
 
-
+      
     </div>
   );
 }
