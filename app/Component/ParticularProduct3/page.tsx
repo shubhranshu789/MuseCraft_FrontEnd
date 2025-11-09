@@ -130,6 +130,13 @@ function ProductContent() {
 
 
   const handleBuyNow = () => {
+    const userString = localStorage.getItem('user');
+
+      if (!userString) {
+        alert('Please login to add items to cart');
+        return;
+      }
+
     // Use the product object created from URL params
     const params = new URLSearchParams({
       buyNow: 'true',

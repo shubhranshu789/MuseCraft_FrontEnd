@@ -140,6 +140,13 @@ function ProductContent() {
 
 
     const handleBuyNow = () => {
+        const userString = localStorage.getItem('user');
+
+      if (!userString) {
+        alert('Please login to add items to cart');
+        return;
+      }
+
         const selectedSize = sizes.find(s => s.id === selectedSizeId);
 
         if (!selectedSize) {
