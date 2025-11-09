@@ -208,7 +208,7 @@ useEffect(() => {
       console.log('User ID:', userId);
       
       // Make API call
-      const response = await fetch('http://localhost:5000/user/is-first-purchase', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/is-first-purchase`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

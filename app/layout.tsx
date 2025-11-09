@@ -6,13 +6,22 @@ import './globals.css'
 
 import Footer from "../app/Component/Footer/page"
 
+// import "../public/logoCompany-removebg-preview.png"
+
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'MuseCraft',
+  description: 'Creating memorable moments through personalized gifts.',
+  generator: 'Shubh',
+  
+  // Add icons/logo
+  icons: {
+    icon: '/logoCompany-removebg-preview.png',              // Browser tab icon
+    shortcut: '/logoCompany-removebg-preview.png',    // Shortcut icon
+    apple: '/logoCompany-removebg-preview.png',          // Apple touch icon
+  },
 }
 
 export default function RootLayout({
