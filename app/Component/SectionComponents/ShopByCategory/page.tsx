@@ -3,11 +3,24 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Gift, Heart, Users, Baby, Dog, Sparkles, User, Star } from 'lucide-react';
+import { Gift, Heart, Users, Baby, Dog, Sparkles, User, Star, BookOpen } from 'lucide-react';
 // Import your product data
-import { products, trendingProducts, miniBooks, gratitudeReminder, magzine, deskCalender, walletCard, whiteBook, photoFrame } from '@/lib/data/products';
+import { 
+    products, 
+    trendingProducts, 
+    miniBooks, 
+    gratitudeReminder, 
+    magzine, 
+    deskCalender, 
+    walletCard, 
+    whiteBook, 
+    photoFrame,
+    Journal,      // Add this import
+    Fragrance,   // Add this import
+    Magnets         // Add this import
+} from '@/lib/data/products';
 
-// Your existing Product interface
+// Your existing Product interface (unchanged)
 export interface Product {
     id: string;
     title: string;
@@ -48,7 +61,7 @@ interface Category {
     subcategories: string[];
 }
 
-// Category configuration (same as before)
+// Updated Category configuration
 const categories: Category[] = [
     {
         id: 'boyfriend',
@@ -111,16 +124,16 @@ const categories: Category[] = [
         subcategories: ['Personalized Novels', 'Personalized Magazines', 'White Book', 
                         'Personalized Frames']
     },
-    // {
-    //     id: 'others',
-    //     name: 'Others',
-    //     icon: Sparkles,
-    //     color: 'from-gray-500 to-slate-500',
-    //     subcategories: ['Fragrances']
-    // }
+    {
+        id: 'others',
+        name: 'Others',
+        icon: Sparkles,
+        color: 'from-gray-500 to-slate-500',
+        subcategories: ['Fragrances']
+    }
 ];
 
-// Map your imported products to categories
+// Updated getCategoryProducts function
 const getCategoryProducts = (categoryId: string): Product[] => {
     switch(categoryId) {
         case 'boyfriend':
@@ -132,6 +145,8 @@ const getCategoryProducts = (categoryId: string): Product[] => {
                 ...walletCard.map(p => ({ ...p, category: 'boyfriend', subcategory: 'Wallet Card' })),
                 ...whiteBook.map(p => ({ ...p, category: 'boyfriend', subcategory: 'White Book' })),
                 ...photoFrame.map(p => ({ ...p, category: 'boyfriend', subcategory: 'Personalized Frames' })),
+                ...Fragrance.map((p: any) => ({ ...p, category: 'boyfriend', subcategory: 'Fragrances' })),
+                ...Magnets.map((p: any) => ({ ...p, category: 'boyfriend', subcategory: 'Fridge Magnets' })),
             ];
         case 'girlfriend':
             return [
@@ -142,6 +157,8 @@ const getCategoryProducts = (categoryId: string): Product[] => {
                 ...walletCard.map(p => ({ ...p, category: 'girlfriend', subcategory: 'Wallet Card' })),
                 ...whiteBook.map(p => ({ ...p, category: 'girlfriend', subcategory: 'White Book' })),
                 ...photoFrame.map(p => ({ ...p, category: 'girlfriend', subcategory: 'Personalized Frames' })),
+                ...Fragrance.map((p: any) => ({ ...p, category: 'girlfriend', subcategory: 'Fragrances' })),
+                ...Magnets.map((p: any) => ({ ...p, category: 'girlfriend', subcategory: 'Fridge Magnets' })),
             ];
         case 'parents':
             return [
@@ -151,6 +168,7 @@ const getCategoryProducts = (categoryId: string): Product[] => {
                 ...deskCalender.map(p => ({ ...p, category: 'parents', subcategory: 'Personalized Desk Calendar' })),
                 ...whiteBook.map(p => ({ ...p, category: 'parents', subcategory: 'White Book' })),
                 ...photoFrame.map(p => ({ ...p, category: 'parents', subcategory: 'Personalized Frames' })),
+                ...Magnets.map((p: any) => ({ ...p, category: 'parents', subcategory: 'Fridge Magnets' })),
             ];
         case 'grandparents':
             return [
@@ -160,20 +178,24 @@ const getCategoryProducts = (categoryId: string): Product[] => {
             ];
         case 'siblings':
             return [
+                ...Journal.map((p: any) => ({ ...p, category: 'siblings', subcategory: 'Gratitude Journal & Diaries' })),
                 ...gratitudeReminder.map(p => ({ ...p, category: 'siblings', subcategory: 'Gratitude Reminders' })),
                 ...miniBooks.filter(book => ['Tales of Trouble', 'Story of Our Life', 'BFFs'].includes(book.title)).map(p => ({ ...p, category: 'siblings', subcategory: 'Personalized Novels' })),
                 ...deskCalender.map(p => ({ ...p, category: 'siblings', subcategory: 'Personalized Desk Calendar' })),
                 ...whiteBook.map(p => ({ ...p, category: 'siblings', subcategory: 'White Book' })),
                 ...photoFrame.map(p => ({ ...p, category: 'siblings', subcategory: 'Personalized Frames' })),
+                ...Magnets.map((p: any) => ({ ...p, category: 'siblings', subcategory: 'Fridge Magnets' })),
             ];
         case 'friends':
             return [
+                ...Journal.map((p: any) => ({ ...p, category: 'friends', subcategory: 'Journal & Diaries' })),
                 ...gratitudeReminder.map(p => ({ ...p, category: 'friends', subcategory: 'Gratitude Reminders' })),
                 ...miniBooks.filter(book => ['Story of our Friendship', 'BFFs', 'Thank You Book'].includes(book.title)).map(p => ({ ...p, category: 'friends', subcategory: 'Personalized Novels' })),
                 ...magzine.filter(m => m.title.includes('Oh My DOG')).map(p => ({ ...p, category: 'friends', subcategory: 'Personalized Magazines' })),
                 ...deskCalender.map(p => ({ ...p, category: 'friends', subcategory: 'Personalized Desk Calendar' })),
                 ...whiteBook.map(p => ({ ...p, category: 'friends', subcategory: 'White Book' })),
                 ...photoFrame.map(p => ({ ...p, category: 'friends', subcategory: 'Personalized Frames' })),
+                ...Magnets.map((p: any) => ({ ...p, category: 'friends', subcategory: 'Fridge Magnets' })),
             ];
         case 'pet':
             return [
@@ -183,7 +205,9 @@ const getCategoryProducts = (categoryId: string): Product[] => {
                 ...photoFrame.map(p => ({ ...p, category: 'pet', subcategory: 'Personalized Frames' })),
             ];
         case 'others':
-            return products.filter(p => p.title.toLowerCase().includes('fragrance'));
+            return [
+                ...Fragrance.map((p: any) => ({ ...p, category: 'others', subcategory: 'Fragrances' })),
+            ];
         default:
             return [];
     }
@@ -205,7 +229,7 @@ export default function CategoryProducts() {
         ? categoryProducts.filter(p => p.subcategory === selectedSubcategory)
         : categoryProducts;
 
-    // Navigation functions
+    // Navigation functions (keep all your existing navigation functions)
     const handleProductClick = (product: Product) => {
         const query = new URLSearchParams({
             id: product.id,
@@ -314,8 +338,7 @@ export default function CategoryProducts() {
         router.push(`/Component/ParticularProduct5?${query}`);
     };
 
-
-        const handleProductClick6 = (product: Product) => {
+    const handleProductClick6 = (product: Product) => {
         const query = new URLSearchParams({
             id: product.id,
             image: product.image,
@@ -342,18 +365,134 @@ export default function CategoryProducts() {
         router.push(`/Component/ParticularProduct6?${query}`);
     };
 
+    const handleProductClick7 = (product: Product) => {
+        const query = new URLSearchParams({
+            id: product.id,
+            image: product.image,
+            image2: product.image2,
+            image3: product.image3,
+            title: product.title,
+            price: product.price.toString(),
+            description: product.description,
+            description2: product.description2,
+            description3: product.description3,
+            description4: product.description4,
+            inside1: product.inside1,
+            inside2: product.inside2,
+            inside3: product.inside3,
+            inside4: product.inside4,
+            inside5: product.inside5,
+            inside6: product.inside6,
+            loveit1: product.loveit1,
+            loveit2: product.loveit2,
+            loveit3: product.loveit3,
+            loveit4: product.loveit4,
+        }).toString();
+
+        router.push(`/Component/ParticularProduct7?${query}`);
+    };
+
+    // Add handlers for new product types
+    const handleProductClick8 = (product: Product) => {
+        const query = new URLSearchParams({
+            id: product.id,
+            image: product.image,
+            image2: product.image2,
+            image3: product.image3,
+            title: product.title,
+            price: product.price.toString(),
+            description: product.description,
+            description2: product.description2,
+            description3: product.description3,
+            description4: product.description4,
+            inside1: product.inside1,
+            inside2: product.inside2,
+            inside3: product.inside3,
+            inside4: product.inside4,
+            inside5: product.inside5,
+            inside6: product.inside6,
+            loveit1: product.loveit1,
+            loveit2: product.loveit2,
+            loveit3: product.loveit3,
+            loveit4: product.loveit4,
+        }).toString();
+
+        router.push(`/Component/ParticularProduct8?${query}`);
+    };
+
+    const handleProductClick9 = (product: Product) => {
+        const query = new URLSearchParams({
+            id: product.id,
+            image: product.image,
+            image2: product.image2,
+            image3: product.image3,
+            title: product.title,
+            price: product.price.toString(),
+            description: product.description,
+            description2: product.description2,
+            description3: product.description3,
+            description4: product.description4,
+            inside1: product.inside1,
+            inside2: product.inside2,
+            inside3: product.inside3,
+            inside4: product.inside4,
+            inside5: product.inside5,
+            inside6: product.inside6,
+            loveit1: product.loveit1,
+            loveit2: product.loveit2,
+            loveit3: product.loveit3,
+            loveit4: product.loveit4,
+        }).toString();
+
+        router.push(`/Component/ParticularProduct9?${query}`);
+    };
+
+    const handleProductClick10 = (product: Product) => {
+        const query = new URLSearchParams({
+            id: product.id,
+            image: product.image,
+            image2: product.image2,
+            image3: product.image3,
+            title: product.title,
+            price: product.price.toString(),
+            description: product.description,
+            description2: product.description2,
+            description3: product.description3,
+            description4: product.description4,
+            inside1: product.inside1,
+            inside2: product.inside2,
+            inside3: product.inside3,
+            inside4: product.inside4,
+            inside5: product.inside5,
+            inside6: product.inside6,
+            loveit1: product.loveit1,
+            loveit2: product.loveit2,
+            loveit3: product.loveit3,
+            loveit4: product.loveit4,
+        }).toString();
+
+        router.push(`/Component/ParticularProduct10?${query}`);
+    };
+
     const handleCardClick = (product: Product) => {
-        // Check if product ID starts with 'm'
-        if (product.id.toLowerCase().startsWith('m')) {
+        const productId = product.id.toLowerCase();
+        
+        // Check product ID prefix to route to correct page
+        if (productId.startsWith('m')) {
             handleProductClick(product);
-        } else if (product.id.toLowerCase().startsWith('pm')) {
+        } else if (productId.startsWith('pm')) {
             handleProductClick4(product);
-        } else if (product.id.toLowerCase().startsWith('pf')) {
+        } else if (productId.startsWith('pf')) {
             handleProductClick5(product);
-        }else if (product.id.toLowerCase().startsWith('wb')) {
+        } else if (productId.startsWith('wb')) {
             handleProductClick6(product);
-        }
-         else {
+        } else if (productId.startsWith('f')) {  // Fragrances
+            handleProductClick8(product);
+        } else if (productId.startsWith('fm')) {  // Fridge Magnets
+            handleProductClick9(product);
+        } else if (productId.startsWith('j')) {  // Journals
+            handleProductClick10(product);
+        } else {
             handleProductClick3(product);
         }
     };
@@ -507,25 +646,6 @@ export default function CategoryProducts() {
                                         <h3 className="font-bold text-lg mb-2 line-clamp-2 group-hover:text-red-600 transition-colors">
                                             {product.title}
                                         </h3>
-                                        
-                                        {/* Rating */}
-                                        {/* <div className="flex items-center gap-1 mb-3">
-                                            <div className="flex">
-                                                {[...Array(5)].map((_, i) => (
-                                                    <Star
-                                                        key={i}
-                                                        className={`w-4 h-4 ${
-                                                            i < Math.floor(product.rating)
-                                                                ? 'fill-yellow-400 text-yellow-400'
-                                                                : 'text-gray-300'
-                                                        }`}
-                                                    />
-                                                ))}
-                                            </div>
-                                            <span className="text-sm text-gray-600">
-                                                ({product.reviews})
-                                            </span>
-                                        </div> */}
 
                                         {/* Description */}
                                         <p className="text-gray-600 text-sm mb-4 line-clamp-2">
@@ -543,32 +663,6 @@ export default function CategoryProducts() {
                                                 </span>
                                             )}
                                         </div>
-
-                                        {/* Action Buttons */}
-                                        {/* <div className="flex gap-2">
-                                            <motion.button
-                                                whileHover={{ scale: 1.05 }}
-                                                whileTap={{ scale: 0.95 }}
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    // Add to cart logic
-                                                }}
-                                                className="flex-1 bg-gradient-to-r from-red-600 to-pink-600 text-white py-2 rounded-lg font-semibold hover:shadow-lg transition-all"
-                                            >
-                                                Add to Cart
-                                            </motion.button>
-                                            <motion.button
-                                                whileHover={{ scale: 1.1 }}
-                                                whileTap={{ scale: 0.9 }}
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    // Add to wishlist logic
-                                                }}
-                                                className="px-4 border-2 border-red-600 text-red-600 rounded-lg hover:bg-red-50 transition-all"
-                                            >
-                                                <Heart className="w-5 h-5" />
-                                            </motion.button>
-                                        </div> */}
                                     </div>
                                 </motion.div>
                             ))

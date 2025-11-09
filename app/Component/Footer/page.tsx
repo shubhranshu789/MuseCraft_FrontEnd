@@ -101,11 +101,11 @@ export default function Footer() {
                             </div>
                             <div className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
                                 <Phone className="w-5 h-5 text-red-600" />
-                                <a href="tel:+911234567890">+91 123 456 7890</a>
+                                <a href="tel:+911234567890">+91 9511382448</a>
                             </div>
                             <div className="flex items-start gap-3 text-gray-400">
                                 <MapPin className="w-5 h-5 text-red-600 mt-1" />
-                                <span>123 Craft Street, New Delhi, India - 110001</span>
+                                <span>Delhi, India</span>
                             </div>
                         </div>
 

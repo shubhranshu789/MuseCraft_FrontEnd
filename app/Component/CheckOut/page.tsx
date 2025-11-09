@@ -189,6 +189,54 @@ function CheckoutPage() {
     }
   };
 
+useEffect(() => {
+  const checkFirstPurchase = async () => {
+    try {
+      // Get the user object from localStorage
+      const userString = localStorage.getItem('user');
+      
+      if (!userString) {
+        console.error('User not found in localStorage');
+        setIsFirstPurchase(false);
+        return;
+      }
+      
+      // Parse the JSON string to get the user object
+      const user = JSON.parse(userString);
+      const userId = user._id; // Extract _id: "6910c3206c38da39127e91dc"
+      
+      console.log('User ID:', userId);
+      
+      // Make API call
+      const response = await fetch('http://localhost:5000/user/is-first-purchase', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userId })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setIsFirstPurchase(data.isFirstPurchase);
+        console.log('Is First Purchase:', data.isFirstPurchase);
+        console.log('Total Orders:', data.totalOrders);
+      } else {
+        console.error('Error:', data.message);
+        setIsFirstPurchase(false);
+      }
+    } catch (error) {
+      console.error('Error fetching first purchase status:', error);
+      setIsFirstPurchase(false);
+    }
+  };
+  
+  checkFirstPurchase();
+}, []);
+
+
+
   const validateForm = (): boolean => {
     const newErrors: Partial<ShippingAddress> = {};
 
@@ -713,7 +761,7 @@ function CheckoutPage() {
                     </div>
 
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-medium mb-2">Address Line 2</label>
+                      <label className="block text-sm font-medium mb-2">Address Line 2 / Landmark</label>
                       <input
                         type="text"
                         value={shippingAddress.addressLine2}
@@ -780,7 +828,7 @@ function CheckoutPage() {
                   <h2 className="text-xl font-semibold mb-4">Payment Method</h2>
 
                   <div className="space-y-3">
-                    <label className="flex items-center space-x-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                    {/* <label className="flex items-center space-x-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
                       <input
                         type="radio"
                         name="payment"
@@ -790,7 +838,7 @@ function CheckoutPage() {
                         className="w-4 h-4 text-blue-600"
                       />
                       <span className="font-medium">Cash on Delivery (COD)</span>
-                    </label>
+                    </label> */}
 
                     {/* <label className="flex items-center space-x-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
                     <input

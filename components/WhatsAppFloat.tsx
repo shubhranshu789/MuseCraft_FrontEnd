@@ -9,7 +9,7 @@ export default function WhatsAppFloat() {
   const [message, setMessage] = useState('');
 
   // Replace with your WhatsApp number (include country code without + or -)
-  const phoneNumber = '919044089686'; // Example: India number
+  const phoneNumber = '919511382448'; // Example: India number
   const defaultMessage = 'Hi! I have a question about your products.';
 
   const handleSendMessage = () => {
