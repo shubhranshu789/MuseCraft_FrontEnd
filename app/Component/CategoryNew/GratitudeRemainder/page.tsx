@@ -111,7 +111,7 @@ export default function CardsPage() {
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Card Collection</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Gratitude Card Collection</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Discover beautifully crafted greeting cards for every occasion and emotion
             </p>

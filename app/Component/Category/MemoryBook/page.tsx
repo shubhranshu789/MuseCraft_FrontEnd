@@ -51,9 +51,9 @@ export default function MemoryBooksPage() {
                 Preserve Your
                 <span className="block text-gray-700">Precious Moments</span>
               </h1>
-              
+
               <p className="text-lg text-gray-600 leading-relaxed">
-                Create timeless memories with our handcrafted memory books. 
+                Create timeless memories with our handcrafted memory books.
                 Each page tells a story, each moment becomes eternal.
               </p>
 
@@ -88,11 +88,12 @@ export default function MemoryBooksPage() {
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Collection</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Personalized Novels Collection</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Discover our range of beautifully crafted memory books designed for every special occasion
+              Discover our range of beautifully crafted personalized novels where you become the main character
             </p>
           </div>
+
 
           {/* Products Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -111,7 +112,7 @@ export default function MemoryBooksPage() {
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
-                  
+
                   {/* Discount Badge */}
                   {book.discount > 0 && (
                     <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
@@ -125,7 +126,7 @@ export default function MemoryBooksPage() {
                   <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
                     {book.title}
                   </h3>
-                  
+
                   <p className="text-sm text-gray-600 mb-4 line-clamp-2">
                     {book.description}
                   </p>

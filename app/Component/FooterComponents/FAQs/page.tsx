@@ -168,7 +168,7 @@ export default function FAQSection() {
                         
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <motion.a
-                                href="https://wa.me/919511382448"
+                                href="https://wa.me/917428326159"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 whileHover={{ scale: 1.05, y: -5 }}
@@ -199,7 +199,7 @@ export default function FAQSection() {
                             >
                                 <Phone className="w-12 h-12 mx-auto mb-3" />
                                 <h3 className="font-bold text-lg mb-2">Call Us</h3>
-                                <p className="text-white/80 text-sm">+91 9511382448</p>
+                                <p className="text-white/80 text-sm">+91 7428326159</p>
                             </motion.a>
                         </div>
                     </motion.div>

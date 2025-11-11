@@ -129,7 +129,7 @@ export default function SignupPage() {
 
       // Redirect to login after 2 seconds
       setTimeout(() => {
-        router.push('/');
+        router.push('/Component/Auth/SignIn');
       }, 2000);
 
     } catch (err) {

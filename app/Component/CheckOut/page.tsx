@@ -378,7 +378,7 @@ useEffect(() => {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: totalAmount * 100, // Convert to paise
         currency: 'INR',
-        name: 'Your Store Name',
+        name: 'MuseCrafts',
         description: 'Payment for Order',
         order_id: orderId,
         handler: async function (response: any) {

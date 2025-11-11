@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from "framer-motion"
 
+
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [cartCount, setCartCount] = useState(0)
@@ -71,13 +73,27 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <motion.div 
+          <motion.div
             whileHover={{ scale: 1.02 }}
-            className="flex-shrink-0 font-bold text-2xl text-gray-900 cursor-pointer"
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            className="flex items-center cursor-pointer"
             onClick={() => router.push('/')}
           >
-            MuseCrafts
+            <img
+              src="/logoCompany-removebg-preview.png"
+              alt="MuseCrafts Logo"
+              width={100}
+              height={100}
+              className="object-contain mb-4"
+            />
+            <span className="relative inline-block font-bold text-2xl text-gray-900 cursor-pointer group">
+              MuseCrafts
+              <span className="absolute left-0 bottom-0 w-full h-0.5 bg-gradient-to-r from-purple-600 via-pink-500 to-rose-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
+            </span>
+
           </motion.div>
+
 
           {/* Desktop Navigation */}
           {/* <div className="hidden md:flex items-center gap-8">
@@ -120,7 +136,7 @@ export default function Navbar() {
             </motion.button>
 
             {/* Dashboard */}
-            <motion.button
+            {/* <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={gotoDashBoard}
@@ -128,7 +144,7 @@ export default function Navbar() {
             >
               <Package className="w-4 h-4" />
               <span>dashBoard</span>
-            </motion.button>
+            </motion.button> */}
 
             {/* Wishlist */}
             <motion.button

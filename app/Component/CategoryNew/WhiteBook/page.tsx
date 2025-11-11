@@ -111,11 +111,12 @@ export default function CardsPage() {
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Notebook Collection</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our White Book Collection</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Premium personalized notebooks and journals for capturing your thoughts in style
+              Elegant blank canvas books perfect for sketching, journaling, or creating your personalized keepsake
             </p>
           </div>
+
 
 
           {/* Products Grid */}

@@ -9,7 +9,7 @@ export default function WhatsAppFloat() {
   const [message, setMessage] = useState('');
 
   // Replace with your WhatsApp number (include country code without + or -)
-  const phoneNumber = '919511382448'; // Example: India number
+  const phoneNumber = '917428326159'; // Example: India number
   const defaultMessage = 'Hi! I have a question about your products.';
 
   const handleSendMessage = () => {
@@ -24,7 +24,7 @@ export default function WhatsAppFloat() {
     <>
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-4 md:right-8 w-80 md:w-96 bg-white rounded-lg shadow-2xl z-[999] animate-slideUp">
+        <div className="fixed bottom-24 right-4 md:right-8 w-80 md:w-96 bg-white rounded-lg shadow-2xl z-50 animate-slideUp">
           {/* Header */}
           <div className="bg-[#075E54] text-white p-4 rounded-t-lg flex items-center justify-between">
             <div className="flex items-center gap-3">

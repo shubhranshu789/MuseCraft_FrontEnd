@@ -6,10 +6,42 @@ import './globals.css'
 
 import Footer from "../app/Component/Footer/page"
 
+import Chatbot from '@/components/Chatbot'
+import { 
+  trendingProducts, 
+  miniBooks,
+  gratitudeReminder,
+  magzine,
+  deskCalender,
+  walletCard,
+  whiteBook,
+  photoFrame,
+  Caricurate,
+  Journal,
+  Fragrance,
+  Magnets,
+
+} from '@/lib/data/products'
+
 // import "../public/logoCompany-removebg-preview.png"
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
+
+const allProducts = [
+    ...trendingProducts,
+    ...miniBooks,
+    ...gratitudeReminder,
+    ...magzine,
+    ...deskCalender,
+    ...walletCard,
+    ...whiteBook,
+    ...photoFrame,
+    ...Caricurate,
+    ...Journal,
+    ...Fragrance,
+    ...Magnets
+  ]
 
 export const metadata: Metadata = {
   title: 'MuseCraft',
@@ -34,7 +66,10 @@ export default function RootLayout({
       <body className={`font-sans antialiased`}>
         {children}
         <Analytics />
+
         <WhatsAppFloat />
+        <Chatbot allProducts={allProducts} />
+      
       </body>
 
       <Footer/>

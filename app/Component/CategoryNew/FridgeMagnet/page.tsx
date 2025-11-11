@@ -43,23 +43,23 @@ export default function CardsPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#d4cfc7] to-[#e8e4df] py-20 px-4 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-[#fef3e2] to-[#fff9f0] py-20 px-4 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="space-y-6">
               <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
-                Your Thoughts
-                <span className="block text-gray-700">Deserve a Beautiful Canvas</span>
+                Your Memories
+                <span className="block text-orange-700">Deserve a Special Spot</span>
               </h1>
 
               <p className="text-lg text-gray-600 leading-relaxed">
-                Premium personalized notebooks and journals with custom covers. Perfect for capturing ideas, dreams, and daily reflections in style.
+                Custom fridge magnets that turn your favorite photos and moments into daily reminders. Brighten your kitchen with personalized magnets that bring smiles.
               </p>
 
               <div className="flex flex-wrap gap-4 pt-4">
-                <button className="bg-gray-900 text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-all duration-200 shadow-lg hover:shadow-xl">
-                  Design Your Notebook
+                <button className="bg-orange-600 text-white px-8 py-3 rounded-full hover:bg-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl">
+                  Create Your Magnet
                 </button>
               </div>
 
@@ -67,21 +67,21 @@ export default function CardsPage() {
               <div className="grid grid-cols-3 gap-4 pt-8">
                 <div className="text-center">
                   <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2 shadow-md">
-                    <BookOpen className="w-8 h-8 text-blue-600" />
+                    <BookOpen className="w-8 h-8 text-red-600" />
                   </div>
-                  <p className="text-sm font-medium text-gray-700">Premium Pages</p>
+                  <p className="text-sm font-medium text-gray-700">Strong Hold</p>
                 </div>
                 <div className="text-center">
                   <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2 shadow-md">
-                    <Sparkles className="w-8 h-8 text-purple-600" />
+                    <Sparkles className="w-8 h-8 text-yellow-600" />
                   </div>
-                  <p className="text-sm font-medium text-gray-700">Custom Cover</p>
+                  <p className="text-sm font-medium text-gray-700">Custom Design</p>
                 </div>
                 <div className="text-center">
                   <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2 shadow-md">
-                    <PenTool className="w-8 h-8 text-amber-600" />
+                    <PenTool className="w-8 h-8 text-blue-600" />
                   </div>
-                  <p className="text-sm font-medium text-gray-700">Versatile</p>
+                  <p className="text-sm font-medium text-gray-700">Durable</p>
                 </div>
               </div>
             </div>
@@ -90,7 +90,7 @@ export default function CardsPage() {
             <div className="relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
               <Image
                 src="/LogoPics/magnet.jpg"
-                alt="Personalized Custom Notebook"
+                alt="Custom Fridge Magnets"
                 fill
                 className="object-cover"
                 priority
@@ -101,9 +101,10 @@ export default function CardsPage() {
         </div>
 
         {/* Decorative Elements */}
-        <div className="absolute top-10 right-10 w-32 h-32 bg-blue-300/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 left-10 w-40 h-40 bg-slate-300/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-10 right-10 w-32 h-32 bg-orange-300/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 left-10 w-40 h-40 bg-yellow-300/20 rounded-full blur-3xl"></div>
       </section>
+
 
 
       {/* Products Section */}
@@ -111,11 +112,12 @@ export default function CardsPage() {
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Notebook Collection</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Magnet Collection</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Premium personalized notebooks and journals for capturing your thoughts in style
+              Custom fridge magnets that transform your favorite photos into cherished daily reminders
             </p>
           </div>
+
 
 
           {/* Products Grid */}

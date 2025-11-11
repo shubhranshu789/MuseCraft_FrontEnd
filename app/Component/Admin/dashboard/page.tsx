@@ -64,7 +64,7 @@ export default function AdminDashboard() {
                         color="bg-yellow-500"
                     />
                     <StatCard
-                        title="Pending Orders"
+                        title="Pending Orders Payments"
                         value={stats?.pendingOrders || 0}
                         icon={<Package className="w-8 h-8" />}
                         color="bg-red-500"
