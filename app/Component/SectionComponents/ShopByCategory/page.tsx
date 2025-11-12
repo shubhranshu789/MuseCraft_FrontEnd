@@ -483,15 +483,15 @@ export default function CategoryProducts() {
         } else if (productId.startsWith('pm')) {
             handleProductClick4(product);
         } else if (productId.startsWith('pf')) {
-            handleProductClick5(product);
+            handleProductClick3(product);
         } else if (productId.startsWith('wb')) {
             handleProductClick6(product);
         } else if (productId.startsWith('f')) {  // Fragrances
-            handleProductClick8(product);
+            handleProductClick3(product);
         } else if (productId.startsWith('fm')) {  // Fridge Magnets
             handleProductClick9(product);
         } else if (productId.startsWith('j')) {  // Journals
-            handleProductClick10(product);
+            handleProductClick3(product);
         } else {
             handleProductClick3(product);
         }
