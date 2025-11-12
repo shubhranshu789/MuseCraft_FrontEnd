@@ -64,6 +64,7 @@ export default function MyOrdersPage() {
       }
 
       const user = JSON.parse(userData);
+      // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getorders/${user._id}`);
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getorders/${user._id}`);
       const data = await response.json();
 

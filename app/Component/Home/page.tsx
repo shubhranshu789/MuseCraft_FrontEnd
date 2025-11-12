@@ -82,7 +82,7 @@ const HomePage = () => {
                 const userId = user._id
 
                 // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getwishlist/${userId}`)
-                const response = await fetch(`http://localhost:5000/getwishlist/${userId}`)
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getwishlist/${userId}`)
                 const data = await response.json()
 
                 if (data.success && data.wishlist) {
