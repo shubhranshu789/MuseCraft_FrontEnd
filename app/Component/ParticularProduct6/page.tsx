@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, Suspense } from 'react'
+import React, { useState, Suspense, useEffect } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ShoppingCart, Heart, Zap, ChevronLeft, ChevronRight, ZoomIn, ChevronDown } from 'lucide-react';
 import Navbar from '@/components/navbar';
@@ -98,6 +98,186 @@ function ProductContent() {
     }
 
 
+
+    const [isInCart, setIsInCart] = useState(false); // New state for cart
+
+
+    useEffect(() => {
+        const checkProductStatus = async () => {
+            try {
+                const userString = localStorage.getItem('user');
+                if (!userString || !pid) return;
+
+                const user = JSON.parse(userString);
+                const userId = user._id;
+
+                // Check wishlist status
+                const wishlistResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getwishlist/${userId}`);
+                const wishlistData = await wishlistResponse.json();
+
+                if (wishlistData.success && wishlistData.wishlist) {
+                    const isInWishlist = wishlistData.wishlist.some((item: any) => item.productId === pid);
+                    setIsWishlisted(isInWishlist);
+                }
+
+                // Check cart status
+                const cartResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getcart/${userId}`);
+                const cartData = await cartResponse.json();
+
+                if (cartData.success && cartData.cart) {
+                    const isProductInCart = cartData.cart.some((item: any) => item.productId === pid);
+                    setIsInCart(isProductInCart);
+                }
+
+            } catch (error) {
+                console.error('Error checking product status:', error);
+            }
+        };
+
+        checkProductStatus();
+    }, [pid]);
+
+
+
+    const handleToggleCart = async () => {
+        setLoading(true);
+
+        try {
+            const userString = localStorage.getItem('user');
+
+            if (!userString) {
+                alert('Please login to manage cart');
+                return;
+            }
+
+            const user = JSON.parse(userString);
+            const userId = user._id;
+
+            if (isInCart) {
+                // Remove from cart
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/removefromcart`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userId,
+                        productId: pid
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    setIsInCart(false);
+                    //   alert('Item removed from cart!');
+                } else {
+                    alert(`Failed: ${data.message}`);
+                }
+            } else {
+                // Add to cart
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/addtocart`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userId,
+                        productId: pid,
+                        image: image12,
+                        title: title,
+                        price: finalPrice,
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    setIsInCart(true);
+                    //   alert('Item added to cart!');
+                } else {
+                    alert(`Failed: ${data.message}`);
+                }
+            }
+
+        } catch (error) {
+            console.error('Error toggling cart:', error);
+            alert('An error occurred. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
+
+    const handleToggleWishlist = async () => {
+        setLoading(true);
+
+        try {
+            const userString = localStorage.getItem('user');
+
+            if (!userString) {
+                alert('Please login to manage wishlist');
+                return;
+            }
+
+            const user = JSON.parse(userString);
+            const userId = user._id;
+
+            if (isWishlisted) {
+                // Remove from wishlist
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/removefromwishlist`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userId,
+                        productId: pid
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    setIsWishlisted(false);
+                    // alert('Item removed from wishlist!');
+                } else {
+                    alert(`Failed: ${data.message}`);
+                }
+            } else {
+                // Add to wishlist
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/addtowishlist`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userId,
+                        productId: pid,
+                        image: image12,
+                        title: title,
+                        price: finalPrice
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    setIsWishlisted(true);
+                    // alert('Item added to wishlist!');
+                } else {
+                    alert(`Failed: ${data.message}`);
+                }
+            }
+
+        } catch (error) {
+            console.error('Error toggling wishlist:', error);
+            alert('An error occurred. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
 
 
 
@@ -353,13 +533,13 @@ function ProductContent() {
         }
     };
 
-    const handleToggleWishlist = async () => {
-        if (isInWishlist) {
-            await handleRemoveFromWishlist();
-        } else {
-            await handleAddToWishlist();
-        }
-    };
+    // const handleToggleWishlist = async () => {
+    //     if (isInWishlist) {
+    //         await handleRemoveFromWishlist();
+    //     } else {
+    //         await handleAddToWishlist();
+    //     }
+    // };
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -376,7 +556,7 @@ function ProductContent() {
                             <img
                                 src={productImages[selectedImageIndex]}
                                 alt={`${title} - View ${selectedImageIndex + 1}`}
-                                className={`w-full h-full object-cover transition-transform duration-500 ${isZoomed ? 'scale-150 cursor-zoom-out' : 'cursor-zoom-in'
+                                className={`w-full h-full object-fit transition-transform duration-500 ${isZoomed ? 'scale-150 cursor-zoom-out' : 'cursor-zoom-in'
                                     }`}
                                 onClick={() => setIsZoomed(!isZoomed)}
                             />
@@ -554,14 +734,15 @@ function ProductContent() {
 
                                 <div className="grid grid-cols-2 gap-3">
                                     {/* Add to Cart */}
-                                    <button
-                                        onClick={handleAddToCart}
-                                        disabled={loading}
-                                        className="bg-white hover:bg-gray-50 text-gray-900 font-semibold py-4 px-6 rounded-xl border-2 border-gray-300 flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    >
-                                        <ShoppingCart className="w-5 h-5" />
-                                        {loading ? 'Adding...' : 'Add to Cart'}
+                                    <button onClick={handleToggleCart} disabled={loading} className={`font-semibold py-4 px-6 rounded-xl border-2
+    transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed
+    ${isInCart ? 'bg-green-50 border-green-500 text-green-600'
+                                            : 'bg-white hover:bg-gray-50 border-gray-300 text-gray-900'}`}>
+                                        <ShoppingCart className={`w-5 h-5 transition-colors duration-300 ${isInCart ? 'fill-green-600 text-green-600' : ''
+                                            }`} />
+                                        {loading ? '...' : isInCart ? 'In Cart' : 'Add to Cart'}
                                     </button>
+
 
                                     {/* Wishlist Toggle */}
                                     <button

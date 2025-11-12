@@ -6,7 +6,7 @@ import "../../public/Images/miniBooks/download.jpeg"
 import "../../public/ShopbyCategories/Category 10_ Fragrances/K. Women Statute Candle/1.jpg"
 import "../../public/ShopbyCategories/Category 10_ Fragrances/L. Heart Bubble Candle/1.jpg"
 import "../../public/ShopbyCategories/Category 1_ Gratitude Journal & Diaries/A. Gratitude Journal/1.jpg"
-import "../../public/ShopbyCategories/Category 1_ Gratitude Journal & Diaries/B. Dear Me_ Journal Kit/1.png"
+import "../../public/ShopbyCategories/Category 8_ Personalized Frames/A. Personalized Spotify photoframe/1.jpg"
 
 
 export interface Product {
@@ -1116,6 +1116,42 @@ export const photoFrame: Product[] = [
         loveit3 : '•	Tabletop design – perfect for home or office use',
         loveit4 : '•	Ideal for gifting, home décor, or workspace personalization',
     },
+    
+]
+
+export const photoFrame2: Product[] = [
+    {
+        id: 'pNew1',
+        title: 'PERSONALIZED SPOTIFY PHOTOFRAME',
+        price: 499,
+        originalPrice: 549,
+        discount: 10,
+        rating: 4,
+        reviews: 22,
+        image: '/ShopbyCategories/Category 8_ Personalized Frames/A. Personalized Spotify photoframe/1.jpg',
+        image2: '/ShopbyCategories/Category 8_ Personalized Frames/A. Personalized Spotify photoframe/2.jpg',
+        image3: '/ShopbyCategories/Category 8_ Personalized Frames/A. Personalized Spotify photoframe/3.jpg',
+        description: 'Where your favorite song meets your favorite memory.',
+        description2: 'Turn your most treasured moments into a timeless keepsake with the Spotify Music Photo Frame — a perfect fusion of music, love, and elegance. This personalized frame combines your favorite photo, a meaningful song, and a custom Spotify code, creating a one-of-a-kind display that brings your memories to life every time you scan and play your song.',
+        description3: 'Whether it’s your first dance track, anniversary song, or the tune that says “this is us”, this frame transforms emotion into art — beautifully.',
+        description4: '',
+        description5: '',
+        trending: true,
+        inside1: '', 
+        inside2: '', 
+        inside3: '', 
+        inside4: '', 
+        inside5: '', 
+        inside6: '', 
+
+        loveit1 : '•	Personalized Design: Your chosen photograph is beautifully printed inside a premium-quality glass frame.',
+        loveit2 : '•	Song of Your Choice: Add the title of your favorite song — the one that defines your bond.',
+        loveit3 : '•	Spotify Code: Each frame includes a scannable Spotify code — simply scan to play your special song instantly.',
+        loveit4 : '•	Premium Build: Made with high-quality glass and a sturdy, elegant frame for long-lasting shine and clarity.',
+    },
+   
+
+   
     
 ]
 

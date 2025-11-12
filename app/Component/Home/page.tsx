@@ -72,52 +72,78 @@ const HomePage = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const handleAddToWishlist = async (e: React.MouseEvent, product: Product) => {
-        e.stopPropagation()
-        setLoading(product.id)
+    useEffect(() => {
+        const fetchWishlist = async () => {
+            try {
+                const userString = localStorage.getItem('user')
+                if (!userString) return
 
-        try {
-            const userString = localStorage.getItem('user')
+                const user = JSON.parse(userString)
+                const userId = user._id
 
-            if (!userString) {
-                alert('Please login to add items to wishlist')
-                return
+                // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getwishlist/${userId}`)
+                const response = await fetch(`http://localhost:5000/getwishlist/${userId}`)
+                const data = await response.json()
+
+                if (data.success && data.wishlist) {
+                    // Create a Set of product IDs from wishlist
+                    const wishlistedIds = new Set(data.wishlist.map((item: any) => item.productId))
+                    setWishlistedProducts(wishlistedIds)
+                }
+            } catch (error) {
+                console.error('Error fetching wishlist:', error)
             }
-
-            const user = JSON.parse(userString)
-            const userId = user._id
-
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/addtowishlist`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    userId: userId,
-                    productId: product.id,
-                    image: product.image,
-                    title: product.title,
-                    price: product.price
-                })
-            })
-
-            const data = await response.json()
-
-            if (data.success) {
-                // Add this product ID to the Set
-                setWishlistedProducts(prev => new Set(prev).add(product.id))
-                alert('Item added to wishlist!')
-            } else {
-                alert(`Failed: ${data.message}`)
-            }
-
-        } catch (error) {
-            console.error('Error adding to wishlist:', error)
-            alert('An error occurred. Please try again.')
-        } finally {
-            setLoading(null)
         }
-    }
+
+        fetchWishlist()
+    }, [])
+
+    // const handleAddToWishlist = async (e: React.MouseEvent, product: Product) => {
+    //     e.stopPropagation()
+    //     setLoading(product.id)
+
+    //     try {
+    //         const userString = localStorage.getItem('user')
+
+    //         if (!userString) {
+    //             alert('Please login to add items to wishlist')
+    //             return
+    //         }
+
+    //         const user = JSON.parse(userString)
+    //         const userId = user._id
+
+    //         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/addtowishlist`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({
+    //                 userId: userId,
+    //                 productId: product.id,
+    //                 image: product.image,
+    //                 title: product.title,
+    //                 price: product.price
+    //             })
+    //         })
+
+    //         const data = await response.json()
+
+    //         if (data.success) {
+    //             // Add this product ID to the Set
+    //             setWishlistedProducts(prev => new Set(prev).add(product.id))
+    //             alert('Item added to wishlist!')
+    //         } else {
+    //             alert(`Failed: ${data.message}`)
+    //         }
+
+    //     } catch (error) {
+    //         console.error('Error adding to wishlist:', error)
+    //         alert('An error occurred. Please try again.')
+    //     } finally {
+    //         setLoading(null)
+    //     }
+    // }
 
     // Product navigation handler
     // const handleProductClick = (product: Product) => {
@@ -134,33 +160,110 @@ const HomePage = () => {
     // };
 
 
-      const handleProductClick = (book: Product) => {
+    const handleAddToWishlist = async (e: React.MouseEvent, product: Product) => {
+        e.stopPropagation()
+        setLoading(product.id)
+
+        try {
+            const userString = localStorage.getItem('user')
+
+            if (!userString) {
+                alert('Please login to add items to wishlist')
+                return
+            }
+
+            const user = JSON.parse(userString)
+            const userId = user._id
+
+            // Check if already wishlisted
+            const isCurrentlyWishlisted = wishlistedProducts.has(product.id)
+
+            if (isCurrentlyWishlisted) {
+                // Remove from wishlist
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/removefromwishlist`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userId,
+                        productId: product.id
+                    })
+                })
+
+                const data = await response.json()
+
+                if (data.success) {
+                    setWishlistedProducts(prev => {
+                        const newSet = new Set(prev)
+                        newSet.delete(product.id)
+                        return newSet
+                    })
+                    // alert('Item removed from wishlist!')
+                } else {
+                    alert(`Failed: ${data.message}`)
+                }
+            } else {
+                // Add to wishlist
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/addtowishlist`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userId,
+                        productId: product.id,
+                        image: product.image,
+                        title: product.title,
+                        price: product.price
+                    })
+                })
+
+                const data = await response.json()
+
+                if (data.success) {
+                    setWishlistedProducts(prev => new Set(prev).add(product.id))
+                    // alert('Item added to wishlist!')
+                } else {
+                    alert(`Failed: ${data.message}`)
+                }
+            }
+
+        } catch (error) {
+            console.error('Error toggling wishlist:', error)
+            alert('An error occurred. Please try again.')
+        } finally {
+            setLoading(null)
+        }
+    }
+
+    const handleProductClick = (book: Product) => {
         const query = new URLSearchParams({
-          id: book.id,
-          image: book.image,
-          image2: book.image2, // Since your Product interface only has one image
-          image3: book.image3, // Since your Product interface only has one image
-          title: book.title,
-          price: book.price.toString(), // Convert number to string
-          description: book.description,
-          description2: book.description2,
-          description3: book.description3,
-          description4: book.description4,
-          inside1: book.inside1,
-          inside2: book.inside2,
-          inside3: book.inside3,
-          inside4: book.inside4,
-          inside5: book.inside5,
-          inside6: book.inside6,
-    
-          loveit1: book.loveit1,
-          loveit2: book.loveit2,
-          loveit3: book.loveit3,
-          loveit4: book.loveit4,
+            id: book.id,
+            image: book.image,
+            image2: book.image2, // Since your Product interface only has one image
+            image3: book.image3, // Since your Product interface only has one image
+            title: book.title,
+            price: book.price.toString(), // Convert number to string
+            description: book.description,
+            description2: book.description2,
+            description3: book.description3,
+            description4: book.description4,
+            inside1: book.inside1,
+            inside2: book.inside2,
+            inside3: book.inside3,
+            inside4: book.inside4,
+            inside5: book.inside5,
+            inside6: book.inside6,
+
+            loveit1: book.loveit1,
+            loveit2: book.loveit2,
+            loveit3: book.loveit3,
+            loveit4: book.loveit4,
         }).toString();
-    
+
         router.push(`/Component/ParticularProduct2?${query}`);
-      };
+    };
 
 
     // const handleProductClick3 = (product: Product) => {
@@ -176,33 +279,33 @@ const HomePage = () => {
     //     router.push(`/Component/ParticularProduct3?${query}`);
     // };
 
-      const handleProductClick3 = (product: Product) => {
+    const handleProductClick3 = (product: Product) => {
         const query = new URLSearchParams({
-          id: product.id,
-          image: product.image,
-          image2: product.image2,
-          image3: product.image3,
-          title: product.title,
-          price: product.price.toString(),
-          description: product.description,
-          description2: product.description2,
-          description3: product.description3,
-          description4: product.description4,
-          inside1: product.inside1,
-          inside2: product.inside2,
-          inside3: product.inside3,
-          inside4: product.inside4,
-          inside5: product.inside5,
-    
-          loveit1: product.loveit1,
-          loveit2: product.loveit2,
-          loveit3: product.loveit3,
-          loveit4: product.loveit4,
-          
+            id: product.id,
+            image: product.image,
+            image2: product.image2,
+            image3: product.image3,
+            title: product.title,
+            price: product.price.toString(),
+            description: product.description,
+            description2: product.description2,
+            description3: product.description3,
+            description4: product.description4,
+            inside1: product.inside1,
+            inside2: product.inside2,
+            inside3: product.inside3,
+            inside4: product.inside4,
+            inside5: product.inside5,
+
+            loveit1: product.loveit1,
+            loveit2: product.loveit2,
+            loveit3: product.loveit3,
+            loveit4: product.loveit4,
+
         }).toString();
-    
+
         router.push(`/Component/ParticularProduct3?${query}`);
-      };
+    };
 
     const handleCardClick = (product: Product) => {
         // Check if product ID starts with 'm'
@@ -391,39 +494,108 @@ const HomePage = () => {
     };
 
     // Product card component with your navigation
-    const ProductCard = ({ product }: { product: Product }) => (
-        <motion.div
-            whileHover={{ y: -5 }}
-            onClick={() => handleCardClick(product)}
-            className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group h-full"
-        >
-            <div className="relative overflow-hidden">
-                <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-40 sm:h-48 md:h-64 object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                {product.discount > 0 && (
-                    <span className="absolute top-2 right-2 md:top-3 md:right-3 bg-green-500 text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-semibold">
-                        {product.discount}% OFF
-                    </span>
-                )}
-                <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={(e) => handleAddToWishlist(e, product)}
-                    // disabled={isLoading}
-                    className={`absolute top-2 left-2 md:top-3 md:left-3 p-1.5 md:p-2 rounded-full shadow-md transition-all duration-300 `}
-                >
-                    <Heart
-                        className={`w-3 h-3 md:w-5 md:h-5 transition-colors duration-300 ${isWishlisted
-                            ? 'text-white fill-white'
-                            : 'text-gray-600'
-                            }`}
+    // const ProductCard = ({ product }: { product: Product }) => (
+    //     <motion.div
+    //         whileHover={{ y: -5 }}
+    //         onClick={() => handleCardClick(product)}
+    //         className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group h-full"
+    //     >
+    //         <div className="relative overflow-hidden">
+    //             <img
+    //                 src={product.image}
+    //                 alt={product.title}
+    //                 className="w-full h-40 sm:h-48 md:h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+    //             />
+    //             {product.discount > 0 && (
+    //                 <span className="absolute top-2 right-2 md:top-3 md:right-3 bg-green-500 text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-semibold">
+    //                     {product.discount}% OFF
+    //                 </span>
+    //             )}
+    //             <motion.button
+    //                 whileHover={{ scale: 1.1 }}
+    //                 whileTap={{ scale: 0.9 }}
+    //                 onClick={(e) => handleAddToWishlist(e, product)}
+    //                 className={`absolute top-2 left-2 md:top-3 md:left-3 p-1.5 md:p-2 rounded-full shadow-md transition-all duration-300`}
+    //             >
+    //                 <Heart
+    //                     className={`w-3 h-3 md:w-5 md:h-5 transition-colors duration-300 ${isWishlisted
+    //                         ? 'text-pink-500 fill-pink-500'
+    //                         : 'text-gray-600'
+    //                         }`}
+    //                 />
+    //             </motion.button>
+
+    //         </div>
+            // <div className="p-2 md:p-4">
+            //     <h3 className="font-semibold text-xs md:text-lg mb-1 md:mb-2 group-hover:text-red-600 transition-colors line-clamp-2">
+            //         {product.title}
+            //     </h3>
+            //     {/* <h3 className="font-semibold text-xs md:text-lg mb-1 md:mb-2 group-hover:text-red-600 transition-colors line-clamp-2">
+            //         {product.id}
+            //     </h3> */}
+            //     <div className="flex items-center mb-1 md:mb-2">
+            //         <div className="flex text-yellow-400">
+            //             {[...Array(5)].map((_, i) => (
+            //                 <Star
+            //                     key={i}
+            //                     className={`w-2 h-2 md:w-4 md:h-4 ${i < Math.floor(product.rating) ? 'fill-current' : ''}`}
+            //                 />
+            //             ))}
+            //         </div>
+            //         {product.reviews > 0 && (
+            //             <span className="text-xs md:text-sm text-gray-600 ml-1 md:ml-2">
+            //                 ({product.reviews})
+            //             </span>
+            //         )}
+            //     </div>
+            //     <div className="flex items-center gap-1 md:gap-2">
+            //         <p className="text-sm md:text-xl font-bold text-gray-900">₹{product.price}</p>
+            //         {product.originalPrice > product.price && (
+            //             <p className="text-xs md:text-base text-gray-500 line-through">₹{product.originalPrice}</p>
+            //         )}
+            //     </div>
+            // </div>
+    //     </motion.div>
+    // );
+
+    const ProductCard = ({ product }: { product: Product }) => {
+        const isWishlisted = wishlistedProducts.has(product.id)
+
+        return (
+            <motion.div
+                whileHover={{ y: -5 }}
+                onClick={() => handleCardClick(product)}
+                className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group h-full"
+            >
+                <div className="relative overflow-hidden">
+                    <img
+                        src={product.image}
+                        alt={product.title}
+                        className="w-full h-40 sm:h-48 md:h-64 object-cover group-hover:scale-110 transition-transform duration-300"
                     />
-                </motion.button>
-            </div>
-            <div className="p-2 md:p-4">
+                    {product.discount > 0 && (
+                        <span className="absolute top-2 right-2 md:top-3 md:right-3 bg-green-500 text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-semibold">
+                            {product.discount}% OFF
+                        </span>
+                    )}
+                    <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={(e) => handleAddToWishlist(e, product)}
+                        disabled={loading === product.id}
+                        className={`absolute top-2 left-2 md:top-3 md:left-3 p-1.5 md:p-2 rounded-full shadow-md transition-all duration-300 ${isWishlisted ? 'bg-pink-50' : 'bg-white'
+                            }`}
+                    >
+                        <Heart
+                            className={`w-3 h-3 md:w-5 md:h-5 transition-colors duration-300 ${isWishlisted
+                                    ? 'text-pink-500 fill-pink-500'
+                                    : 'text-gray-600'
+                                }`}
+                        />
+                    </motion.button>
+                </div>
+                {/* Rest of your card content */}
+                <div className="p-2 md:p-4">
                 <h3 className="font-semibold text-xs md:text-lg mb-1 md:mb-2 group-hover:text-red-600 transition-colors line-clamp-2">
                     {product.title}
                 </h3>
@@ -452,8 +624,10 @@ const HomePage = () => {
                     )}
                 </div>
             </div>
-        </motion.div>
-    );
+            </motion.div>
+        )
+    }
+
 
     // Hero carousel navigation
     const nextHeroSlide = () => {
@@ -592,7 +766,7 @@ const HomePage = () => {
                                 </motion.div>
 
                                 {/* Image Section */}
-                                
+
 
                                 <motion.div
                                     initial={{ x: 100, opacity: 0, rotateY: -20 }}
