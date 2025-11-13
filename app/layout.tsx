@@ -50,9 +50,9 @@ export const metadata: Metadata = {
   
   // Add icons/logo
   icons: {
-    icon: '/logoCompany-removebg-preview.png',              // Browser tab icon
-    shortcut: '/logoCompany-removebg-preview.png',    // Shortcut icon
-    apple: '/logoCompany-removebg-preview.png',          // Apple touch icon
+    icon: '/logoCompany-removebg-preview.png',              
+    shortcut: '/logoCompany-removebg-preview.png',    
+    apple: '/logoCompany-removebg-preview.png',          
   },
 }
 
