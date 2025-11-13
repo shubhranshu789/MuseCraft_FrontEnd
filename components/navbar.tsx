@@ -114,7 +114,7 @@ export default function Navbar() {
           {/* Right Side - Icons */}
           <div className="flex items-center gap-2">
             {/* Cart */}
-            <motion.button
+            {/* <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={gotoCart}
@@ -122,10 +122,10 @@ export default function Navbar() {
             >
               <ShoppingCart className="w-4 h-4" />
               <span>Cart</span>
-            </motion.button>
+            </motion.button> */}
 
             {/* My Orders */}
-            <motion.button
+            {/* <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={gotoMyOrders}
@@ -133,10 +133,10 @@ export default function Navbar() {
             >
               <Package className="w-4 h-4" />
               <span>Orders</span>
-            </motion.button>
+            </motion.button> */}
 
             {/* Dashboard */}
-            {/* <motion.button
+            <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={gotoDashBoard}
@@ -144,10 +144,10 @@ export default function Navbar() {
             >
               <Package className="w-4 h-4" />
               <span>dashBoard</span>
-            </motion.button> */}
+            </motion.button>
 
             {/* Wishlist */}
-            <motion.button
+            {/* <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={gotoWishList}
@@ -155,7 +155,7 @@ export default function Navbar() {
             >
               <Heart className="w-4 h-4" />
               <span>Wishlist</span>
-            </motion.button>
+            </motion.button> */}
 
             {/* Dashboard - Only show for admin */}
             {user?.role === 'admin' && (

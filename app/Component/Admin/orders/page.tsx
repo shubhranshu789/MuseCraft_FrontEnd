@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import { Search, Eye, Package } from 'lucide-react';
+import Navbar from "../navbar/page"
 
 interface Order {
     orderId: string;
@@ -81,7 +82,9 @@ export default function OrdersManagement() {
     };
 
     return (
-        <div className="p-8">
+       <div>
+        <Navbar/>
+         <div className="p-8">
             <h1 className="text-3xl font-bold mb-6">Orders Management</h1>
 
             <div className="flex gap-4 mb-6">
@@ -197,6 +200,7 @@ export default function OrdersManagement() {
                 />
             )}
         </div>
+       </div>
     );
 }
 

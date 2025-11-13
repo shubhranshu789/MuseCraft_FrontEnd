@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react';
 import { Search, Trash2, Eye } from 'lucide-react';
 import UserDetailsModal from '@/components/UserDetailsModal';
+import Navbar from "../navbar/page"
 
 interface User {
     _id: string;
@@ -54,7 +55,9 @@ export default function UsersManagement() {
     };
 
     return (
-        <div className="p-8">
+       <div>
+        <Navbar/>
+         <div className="p-8">
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold">Users Management</h1>
             </div>
@@ -147,5 +150,6 @@ export default function UsersManagement() {
                 />
             )}
         </div>
+       </div>
     );
 }

@@ -1,7 +1,7 @@
 // components/AdminNavbar.tsx
 'use client';
 
-// import "../../../Component/Admin/users/page"
+// import "../../../Component/Admin/dashboard/page"
 
 import { useState } from 'react';
 import {
@@ -36,6 +36,11 @@ export default function AdminNavbar({ onMenuToggle }: AdminNavbarProps) {
     };
 
 
+    const gotoDashBoard = () => {
+        router.push(`/Component/Admin/dashboard`);
+    };
+
+
 
 
 
@@ -43,7 +48,7 @@ export default function AdminNavbar({ onMenuToggle }: AdminNavbarProps) {
         <nav className="bg-white shadow-sm border-b border-gray-200 px-4 py-3 sticky top-0 z-40">
             <div className="flex items-center justify-between">
                 {/* Left Section */}
-                <div className="flex items-center gap-4">
+                <div style={{cursor : "pointer"}} className="flex items-center gap-4" onClick={() => {gotoDashBoard()}}>
                     <button
                         onClick={onMenuToggle}
                         className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
@@ -116,7 +121,7 @@ export default function AdminNavbar({ onMenuToggle }: AdminNavbarProps) {
 
                     {/* Profile Menu */}
                     <div className="relative">
-                        <button
+                        {/* <button
                             onClick={() => setShowProfileMenu(!showProfileMenu)}
                             className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg transition-colors"
                         >
@@ -124,7 +129,7 @@ export default function AdminNavbar({ onMenuToggle }: AdminNavbarProps) {
                                 <User className="w-5 h-5 text-white" />
                             </div>
                             <span className="hidden md:block text-sm font-medium text-gray-700">Admin</span>
-                        </button>
+                        </button> */}
 
                         {showProfileMenu && (
                             <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
