@@ -571,7 +571,7 @@ const HomePage = () => {
                     <img
                         src={product.image}
                         alt={product.title}
-                        className="w-full h-40 sm:h-48 md:h-64 object-fit group-hover:scale-110 transition-transform duration-300"
+                        className="w-full h-40 sm:h-48 md:h-64 object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                     {product.discount > 0 && (
                         <span className="absolute top-2 right-2 md:top-3 md:right-3 bg-green-500 text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-semibold">
