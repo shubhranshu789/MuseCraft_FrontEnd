@@ -539,7 +539,7 @@ function ProductContent() {
               <img
                 src={productImages[selectedImageIndex]}
                 alt={`${title} - View ${selectedImageIndex + 1}`}
-                className={`w-full h-full object-fit transition-transform duration-500 ${isZoomed ? 'scale-150 cursor-zoom-out' : 'cursor-zoom-in'
+                className={`w-full h-full object-contain transition-transform duration-500 ${isZoomed ? 'scale-150 cursor-zoom-out' : 'cursor-zoom-in'
                   }`}
                 onClick={() => setIsZoomed(!isZoomed)}
               />
