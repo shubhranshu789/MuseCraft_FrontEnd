@@ -190,6 +190,18 @@ function CheckoutPage() {
   };
 
 
+useEffect(() => {
+  const script = document.createElement('script');
+  script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+  script.async = true;
+  script.onload = () => setRazorpayLoaded(true);
+  script.onerror = () => {
+    setRazorpayLoaded(false);
+    alert('Failed to load payment system. Please check your connection.');
+  };
+  document.body.appendChild(script);
+}, []);
+
 
 useEffect(() => {
   const checkFirstPurchase = async () => {
@@ -588,6 +600,8 @@ useEffect(() => {
   //     }
   //   }
   // };
+
+
 
   const handlePlaceOrder = async (e: React.FormEvent) => {
     e.preventDefault();
