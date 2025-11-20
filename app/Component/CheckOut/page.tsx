@@ -189,6 +189,8 @@ function CheckoutPage() {
     }
   };
 
+
+
 useEffect(() => {
   const checkFirstPurchase = async () => {
     try {
@@ -602,6 +604,7 @@ useEffect(() => {
     if (paymentMethod === 'card' || paymentMethod === 'upi' || paymentMethod === 'netbanking') {
       if (!razorpayLoaded) {
         alert('Payment system is loading. Please wait...');
+        window.location.reload();
         setSubmitting(false);
         return;
       }
