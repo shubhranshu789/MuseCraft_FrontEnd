@@ -7,6 +7,7 @@ import "../../public/ShopbyCategories/Category 10_ Fragrances/K. Women Statute C
 import "../../public/ShopbyCategories/Category 10_ Fragrances/L. Heart Bubble Candle/1.jpg"
 import "../../public/ShopbyCategories/Category 1_ Gratitude Journal & Diaries/A. Gratitude Journal/1.jpg"
 import "../../public/ShopbyCategories/Category 8_ Personalized Frames/A. Personalized Spotify photoframe/1.jpg"
+import "../../public/ShopbyCategories/Category 10_ Fragrances/M. Flower Bouquet Candle/1.jpg"
 
 
 export interface Product {
@@ -1627,6 +1628,37 @@ export const Fragrance: Product[] = [
         loveit2: '•    Made with natural soy wax for a clean and long-lasting burn',
         loveit3: '•    Available in scented and unscented options',
         loveit4: '•    Ideal for home décor, gifting, or event styling',
+    }
+    ,
+
+
+    {
+        id: 'fa13',
+        title: 'FLOWER BOUQUET CANDLE',
+        price: 550,
+        originalPrice: 610,
+        discount: 10,
+        rating: 4.5,
+        reviews: 4,
+        image: '/ShopbyCategories/Category 10_ Fragrances/M. Flower Bouquet Candle/1.jpg',
+        image2: '/ShopbyCategories/Category 10_ Fragrances/M. Flower Bouquet Candle/2.jpg',
+        image3: '/ShopbyCategories/Category 10_ Fragrances/M. Flower Bouquet Candle/3.jpg',
+        description: 'Set Includes: 5 flower Candles, Colour: Soft Pink/ Lavendar/ Blue/ Off White (can be customised on request) , Material: Premium Soy Wax, Fragrance: Soft Vanilla / Floral, Burn Time: 4-5 Hours (Each), Type: Handcrafted Splitable Bouquet Candle',
+        description2: 'The Musecrafts Flower Bouquet Candle is a masterpiece that combines the beauty of real flowers with the warmth of candlelight. Expertly hand-poured from natural soy wax, this candle is sculpted to resemble a delicate bouquet of blooming flowers — a work of art that delights the eyes as much as the senses.',
+        description3: 'What makes it truly unique is its modular design — each wax flower can be separated and used as an individual candle, allowing you to enjoy its charm in multiple spaces or share it with loved ones. Whether displayed as a full bouquet or divided into smaller candles, it radiates elegance and comfort wherever it’s placed.',
+        description4: 'Infused with a romantic floral fragrance of peony, rose, jasmine, and white musk, the Flower Bouquet Candle fills any room with a soothing, luxurious aroma that lingers even after the flame is out. It’s not just a candle — it’s an experience, a gesture of love, and a lasting gift that leaves behind the fragrance of cherished memories.',
+        description5: '',
+        trending: true,
+        inside1: '', 
+        inside2: '', 
+        inside3: '', 
+        inside4: '', 
+        inside5: '', 
+        inside6: '', 
+        loveit1: '•	Splitable design: Each flower can be separated and lit individually for versatile use.',
+        loveit2: '•	Artfully handcrafted: Every piece is uniquely molded for a lifelike floral appearance.',
+        loveit3: '•	Long-lasting glow: Enjoy up to 45 hours of burn time across the bouquet.',
+        loveit4: '•	Eco-conscious: Made with 100% natural soy wax and a lead-free cotton wick.',
     }
 ];
 
