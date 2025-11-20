@@ -190,64 +190,64 @@ function CheckoutPage() {
   };
 
 
-useEffect(() => {
-  const script = document.createElement('script');
-  script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-  script.async = true;
-  script.onload = () => setRazorpayLoaded(true);
-  script.onerror = () => {
-    setRazorpayLoaded(false);
-    alert('Failed to load payment system. Please check your connection.');
-  };
-  document.body.appendChild(script);
-}, []);
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    script.onload = () => setRazorpayLoaded(true);
+    script.onerror = () => {
+      setRazorpayLoaded(false);
+      alert('Failed to load payment system. Please check your connection.');
+    };
+    document.body.appendChild(script);
+  }, []);
 
 
-useEffect(() => {
-  const checkFirstPurchase = async () => {
-    try {
-      // Get the user object from localStorage
-      const userString = localStorage.getItem('user');
-      
-      if (!userString) {
-        console.error('User not found in localStorage');
+  useEffect(() => {
+    const checkFirstPurchase = async () => {
+      try {
+        // Get the user object from localStorage
+        const userString = localStorage.getItem('user');
+
+        if (!userString) {
+          console.error('User not found in localStorage');
+          setIsFirstPurchase(false);
+          return;
+        }
+
+        // Parse the JSON string to get the user object
+        const user = JSON.parse(userString);
+        const userId = user._id; // Extract _id: "6910c3206c38da39127e91dc"
+
+        console.log('User ID:', userId);
+
+        // Make API call
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/is-first-purchase`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ userId })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          setIsFirstPurchase(data.isFirstPurchase);
+          console.log('Is First Purchase:', data.isFirstPurchase);
+          console.log('Total Orders:', data.totalOrders);
+        } else {
+          console.error('Error:', data.message);
+          setIsFirstPurchase(false);
+        }
+      } catch (error) {
+        console.error('Error fetching first purchase status:', error);
         setIsFirstPurchase(false);
-        return;
       }
-      
-      // Parse the JSON string to get the user object
-      const user = JSON.parse(userString);
-      const userId = user._id; // Extract _id: "6910c3206c38da39127e91dc"
-      
-      console.log('User ID:', userId);
-      
-      // Make API call
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/is-first-purchase`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ userId })
-      });
-      
-      const data = await response.json();
-      
-      if (data.success) {
-        setIsFirstPurchase(data.isFirstPurchase);
-        console.log('Is First Purchase:', data.isFirstPurchase);
-        console.log('Total Orders:', data.totalOrders);
-      } else {
-        console.error('Error:', data.message);
-        setIsFirstPurchase(false);
-      }
-    } catch (error) {
-      console.error('Error fetching first purchase status:', error);
-      setIsFirstPurchase(false);
-    }
-  };
-  
-  checkFirstPurchase();
-}, []);
+    };
+
+    checkFirstPurchase();
+  }, []);
 
 
 
@@ -439,6 +439,10 @@ useEffect(() => {
       });
 
       razorpay.open();
+
+      setTimeout(() => {
+        setSubmitting(false);
+      }, 3000);
     } catch (error) {
       console.error('Payment initiation error:', error);
       alert('Failed to initiate payment. Please try again.');

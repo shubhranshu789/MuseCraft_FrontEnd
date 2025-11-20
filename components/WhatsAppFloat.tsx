@@ -24,7 +24,7 @@ export default function WhatsAppFloat() {
     <>
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-4 md:right-8 w-80 md:w-96 bg-white rounded-lg shadow-2xl z-50 animate-slideUp">
+        <div className="fixed bottom-24 right-1 md:right-8 w-80 md:w-96 bg-white rounded-lg shadow-2xl z-50 animate-slideUp">
           {/* Header */}
           <div className="bg-[#075E54] text-white p-4 rounded-t-lg flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -74,7 +74,7 @@ export default function WhatsAppFloat() {
       {/* Floating Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-4 md:right-8 w-14 h-14 md:w-16 md:h-16 bg-[#25D366] text-white rounded-full shadow-2xl hover:bg-[#20BA5A] transition-all hover:scale-110 z-[999] flex items-center justify-center group"
+        className="fixed bottom-6 right-4 md:right-5 w-14 h-14 md:w-16 md:h-16 bg-[#25D366] text-white rounded-full shadow-2xl hover:bg-[#20BA5A] transition-all hover:scale-110 z-[999] flex items-center justify-center group"
         aria-label="Chat on WhatsApp"
       >
         {isOpen ? (
