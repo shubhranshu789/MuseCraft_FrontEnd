@@ -1633,7 +1633,7 @@ export const Fragrance: Product[] = [
 
 export const Magnets: Product[] = [
     {
-        id: 'mag1',
+        id: 'z1',
         title: 'Acrylic Fridge Magnet (set of 2)',
         price: 325,
         originalPrice: 399,

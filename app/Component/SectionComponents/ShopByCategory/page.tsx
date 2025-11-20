@@ -492,7 +492,11 @@ export default function CategoryProducts() {
             handleProductClick9(product);
         } else if (productId.startsWith('j')) {  // Journals
             handleProductClick3(product);
-        } else {
+        }
+        else if (productId.startsWith('z1')) {  // Journals
+            handleProductClick7(product);
+        }
+         else {
             handleProductClick3(product);
         }
     };

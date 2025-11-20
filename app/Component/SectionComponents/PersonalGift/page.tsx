@@ -235,7 +235,7 @@ export default function GiftFinder() {
           handleProductClick6(product)
         } 
 
-        else if(product.id.toLowerCase().startsWith('mag')){
+        else if(product.id.toLowerCase().startsWith('z')){
           handleProductClick7(product)
         } 
         

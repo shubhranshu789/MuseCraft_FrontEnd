@@ -222,7 +222,7 @@ export default function Chatbot({ allProducts }: ChatbotProps) {
       handleProductClick5(product)
     } else if (productId.startsWith('wb')) {
       handleProductClick6(product)
-    } else if (productId.startsWith('mag')) {
+    } else if (productId.startsWith('z')) {
       handleProductClick7(product)
     } else {
       handleProductClick3(product)
@@ -255,7 +255,7 @@ export default function Chatbot({ allProducts }: ChatbotProps) {
     if (/(price|cost|how much|budget|cheap|expensive)/i.test(lowerMsg)) return 'price'
     if (/(journal|gratitude|diary)/i.test(lowerMsg)) return 'journal'
     if (/(novel|book|story)/i.test(lowerMsg)) return 'novel'
-    if (/(fragrance|candle|scent)/i.test(lowerMsg)) return 'fragrance'
+    if (/(fragrance|candle|scent|smell)/i.test(lowerMsg)) return 'fragrance'
     if (/(frame|photo|picture)/i.test(lowerMsg)) return 'frame'
     if (/(calendar|desk)/i.test(lowerMsg)) return 'calendar'
     if (/(wallet|card)/i.test(lowerMsg)) return 'wallet'
@@ -348,7 +348,7 @@ export default function Chatbot({ allProducts }: ChatbotProps) {
         }
 
       case 'magnet':
-        const magnets = allProducts.filter(p => p.id.toLowerCase().startsWith('mag'))
+        const magnets = allProducts.filter(p => p.id.toLowerCase().startsWith('z'))
         return {
           text: "Custom fridge magnets to brighten your kitchen:",
           products: magnets.slice(0, 3)
