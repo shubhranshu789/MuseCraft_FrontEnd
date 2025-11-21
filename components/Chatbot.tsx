@@ -248,27 +248,35 @@ export default function Chatbot({ allProducts }: ChatbotProps) {
   }
 
   // Intent detection
-  const detectIntent = (message: string): string => {
-    const lowerMsg = message.toLowerCase()
-    
-    if (/(hi|hello|hey|greetings)/i.test(lowerMsg)) return 'greeting'
-    if (/(price|cost|how much|budget|cheap|expensive)/i.test(lowerMsg)) return 'price'
-    if (/(journal|gratitude|diary)/i.test(lowerMsg)) return 'journal'
-    if (/(novel|book|story)/i.test(lowerMsg)) return 'novel'
-    if (/(fragrance|candle|scent|smell)/i.test(lowerMsg)) return 'fragrance'
-    if (/(frame|photo|picture)/i.test(lowerMsg)) return 'frame'
-    if (/(calendar|desk)/i.test(lowerMsg)) return 'calendar'
-    if (/(wallet|card)/i.test(lowerMsg)) return 'wallet'
-    if (/(magnet|fridge)/i.test(lowerMsg)) return 'magnet'
-    if (/(caricature|cartoon)/i.test(lowerMsg)) return 'caricature'
-    if (/(magazine|mag)/i.test(lowerMsg)) return 'magazine'
-    if (/(white book|blank)/i.test(lowerMsg)) return 'whitebook'
-    if (/(birthday|anniversary|valentine|wedding|mother|father)/i.test(lowerMsg)) return 'occasion'
-    if (/(gift|present)/i.test(lowerMsg)) return 'gift'
-    if (/(bestseller|popular|trending|top)/i.test(lowerMsg)) return 'bestseller'
-    
-    return 'general'
-  }
+  // Extend the intent detection function
+const detectIntent = (message: string): string => {
+  const lowerMsg = message.toLowerCase()
+
+  if (/(hi|hello|hey|greetings)/i.test(lowerMsg)) return 'greeting'
+  if (/(price|cost|how much|budget|cheap|expensive)/i.test(lowerMsg)) return 'price'
+  if (/(journal|gratitude|diary)/i.test(lowerMsg)) return 'journal'
+  if (/(novel|book|story)/i.test(lowerMsg)) return 'novel'
+  if (/(fragrance|candle|scent|smell)/i.test(lowerMsg)) return 'fragrance'
+  if (/(frame|photo|picture)/i.test(lowerMsg)) return 'frame'
+  if (/(calendar|desk)/i.test(lowerMsg)) return 'calendar'
+  if (/(wallet|card)/i.test(lowerMsg)) return 'wallet'
+  if (/(magnet|fridge)/i.test(lowerMsg)) return 'magnet'
+  if (/(caricature|cartoon)/i.test(lowerMsg)) return 'caricature'
+  if (/(magazine|mag)/i.test(lowerMsg)) return 'magazine'
+  if (/(white book|blank)/i.test(lowerMsg)) return 'whitebook'
+  if (/(birthday|anniversary|valentine|wedding|mother|father)/i.test(lowerMsg)) return 'occasion'
+  if (/(gift|present)/i.test(lowerMsg)) return 'gift'
+  if (/(bestseller|popular|trending|top)/i.test(lowerMsg)) return 'bestseller'
+
+  // New intents for company and policies
+  if (/(who are you|about musecrafts|tell me about)/i.test(lowerMsg)) return 'about'
+  if (/(faq|faqs|frequently asked questions)/i.test(lowerMsg)) return 'faq'
+  if (/(refund|cancellation|return policy|cancel order)/i.test(lowerMsg)) return 'refund'
+  if (/(privacy|data|personal information|cookie)/i.test(lowerMsg)) return 'privacy'
+  if (/(order tracking|track order|shipping|delivery)/i.test(lowerMsg)) return 'ordertracking'
+
+  return 'general'
+}
 
   // Generate bot response
   const generateResponse = (userMessage: string): { text: string; products?: Product[] } => {
@@ -397,6 +405,26 @@ export default function Chatbot({ allProducts }: ChatbotProps) {
           )
         }
         
+      case 'about':
+      return {
+        text: "Welcome to Musecrafts! We are passionate creators who transform your stories and memories into personalized gifts like bespoke storybooks, journals, magazines, candles, and more. Every item is crafted to celebrate your unique story."
+      }
+    case 'faq':
+      return {
+        text: "Here are some FAQs: You can place orders on our website and personalize your products through a questionnaire sent via email or WhatsApp. We provide digital previews before production to ensure your satisfaction."
+      }
+    case 'refund':
+      return {
+        text: "Please note that once an order is placed, it cannot be cancelled or refunded. However, we accept replacements for damaged or incorrect items if notified within 2 days with an unboxing video as proof."
+      }
+    case 'privacy':
+      return {
+        text: "Your privacy is important to us. We collect personal info only to personalize your experience and fulfill orders. We use cookies for site functionality and do not share your data without consent."
+      }
+    case 'ordertracking':
+      return {
+        text: "Shipping times vary by product and location. You can track your orders through the tracking link we send after dispatch. Feel free to ask if you need help with your order status."
+      }
         return {
           text: "Perfect gifts for your special occasion:",
           products: occasionProducts.length > 0 ? occasionProducts.slice(0, 3) : allProducts.slice(0, 3)

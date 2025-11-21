@@ -639,271 +639,214 @@ const HomePage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            {/* Navigation */}
+
+        <>
+            <style>
+                {`
+          @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+          @keyframes spin-slow-reverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+          }
+          .animate-spin-slow {
+            animation: spin-slow 40s linear infinite;
+          }
+          .animate-spin-slow-reverse {
+            animation: spin-slow-reverse 50s linear infinite;
+          }
+        `}
+            </style>
 
 
-            {/* Hero Carousel */}
-            <section className="relative min-h-[600px] md:h-[600px] lg:h-[700px] overflow-hidden">
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={currentHeroSlide}
-                        initial={{ opacity: 0, scale: 1.1 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.8, ease: "easeInOut" }}
-                        className={`absolute inset-0 bg-gradient-to-br ${heroSlides[currentHeroSlide].theme}`}
-                    >
-                        {/* Decorative Elements */}
-                        <div className="absolute inset-0 overflow-hidden">
-                            <motion.div
-                                animate={{
-                                    rotate: [0, 360],
-                                    scale: [1, 1.2, 1]
-                                }}
-                                transition={{
-                                    duration: 20,
-                                    repeat: Infinity,
-                                    ease: "linear"
-                                }}
-                                className="absolute -top-20 -right-20 w-96 h-96 bg-red-200/20 rounded-full blur-3xl"
-                            />
-                            <motion.div
-                                animate={{
-                                    rotate: [360, 0],
-                                    scale: [1.2, 1, 1.2]
-                                }}
-                                transition={{
-                                    duration: 15,
-                                    repeat: Infinity,
-                                    ease: "linear"
-                                }}
-                                className="absolute -bottom-32 -left-32 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl"
-                            />
-                        </div>
+            <div className="min-h-screen bg-gray-50">
+                {/* Navigation */}
 
-                        <div className="container mx-auto px-4 md:px-8 h-full flex items-center relative z-10 py-8 md:py-0">
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center w-full">
-                                {/* Text Content */}
-                                <motion.div
-                                    initial={{ x: -100, opacity: 0 }}
-                                    animate={{ x: 0, opacity: 1 }}
-                                    transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-                                    className="space-y-4 md:space-y-6 text-center lg:text-left"
-                                >
-                                    <motion.div
-                                        initial={{ y: 20, opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        transition={{ delay: 0.4, duration: 0.6 }}
-                                    >
-                                        <h1 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
-                                            <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                                                {heroSlides[currentHeroSlide].title}
-                                            </span>
-                                        </h1>
-                                        <h2 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mt-2 bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
-                                            {heroSlides[currentHeroSlide].subtitle}
-                                        </h2>
-                                    </motion.div>
 
-                                    <motion.p
-                                        initial={{ y: 20, opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        transition={{ delay: 0.6, duration: 0.6 }}
-                                        className="text-sm md:text-base lg:text-lg text-gray-700 max-w-xl mx-auto lg:mx-0"
-                                    >
-                                        {heroSlides[currentHeroSlide].description}
-                                    </motion.p>
-
-                                    {/* Trust Indicators */}
-                                    <motion.div
-                                        initial={{ y: 20, opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        transition={{ delay: 1, duration: 0.6 }}
-                                        className="flex flex-wrap gap-3 md:gap-6 justify-center lg:justify-start items-center text-xs md:text-sm text-gray-600 pt-2 md:pt-4"
-                                    >
-                                        <div className="flex items-center gap-2">
-                                            <span className="text-green-600">✓</span>
-                                            <span>Free Shipping</span>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <span className="text-green-600">✓</span>
-                                            <span>Handcrafted Quality</span>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <span className="text-green-600">✓</span>
-                                            <span>100% Satisfaction</span>
-                                        </div>
-                                    </motion.div>
-                                </motion.div>
-
-                                {/* Image Section - Now Responsive */}
-                                <motion.div
-                                    initial={{ x: 100, opacity: 0, rotateY: -20 }}
-                                    animate={{ x: 0, opacity: 1, rotateY: 0 }}
-                                    transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-                                    className="flex justify-center items-center"
-                                >
-                                    <motion.div
-                                        whileHover={{
-                                            scale: 1.05,
-                                            rotateY: 5,
-                                            rotateX: -5,
-                                        }}
-                                        transition={{ duration: 0.3 }}
-                                        className="relative w-full max-w-lg h-[250px] md:h-[350px] lg:h-[450px] rounded-3xl overflow-hidden shadow-2xl"
-                                        style={{ transformStyle: "preserve-3d" }}
-                                    >
-                                        {/* Display Actual Image */}
-                                        <img
-                                            src={heroSlides[currentHeroSlide].image}
-                                            alt={heroSlides[currentHeroSlide].title}
-                                            className="w-full h-full object-cover"
-                                        />
-
-                                        {/* Overlay gradient for text readability */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-
-                                        {/* Floating Elements */}
-                                        <motion.div
-                                            animate={{
-                                                y: [-10, 10, -10],
-                                                rotate: [0, 5, 0]
-                                            }}
-                                            transition={{
-                                                duration: 3,
-                                                repeat: Infinity,
-                                                ease: "easeInOut"
-                                            }}
-                                            className="absolute top-4 right-4 md:top-10 md:right-10 bg-white p-2 md:p-4 rounded-xl md:rounded-2xl shadow-xl z-10"
-                                        >
-                                            <Gift className="w-8 h-8 md:w-12 md:h-12 text-red-600" />
-                                        </motion.div>
-
-                                        <motion.div
-                                            animate={{
-                                                y: [10, -10, 10],
-                                                rotate: [0, -5, 0]
-                                            }}
-                                            transition={{
-                                                duration: 3.5,
-                                                repeat: Infinity,
-                                                ease: "easeInOut",
-                                                delay: 0.5
-                                            }}
-                                            className="absolute bottom-4 left-4 md:bottom-10 md:left-10 bg-gradient-to-br from-red-600 to-pink-600 p-2 md:p-4 rounded-xl md:rounded-2xl shadow-xl z-10"
-                                        >
-                                            <span className="text-white font-bold text-lg md:text-2xl">🎁</span>
-                                        </motion.div>
-                                    </motion.div>
-                                </motion.div>
-                            </div>
-                        </div>
-                    </motion.div>
-                </AnimatePresence>
-
-                {/* Navigation Buttons */}
-                <motion.button
-                    whileHover={{ scale: 1.2, x: -5 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={prevHeroSlide}
-                    className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-20 group"
-                >
-                    <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-pink-600 rounded-full blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
-                        <ChevronLeft className="relative w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 text-white drop-shadow-2xl stroke-[2.5]" />
-                    </div>
-                </motion.button>
-
-                <motion.button
-                    whileHover={{ scale: 1.2, x: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={nextHeroSlide}
-                    className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-20 group"
-                >
-                    <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-l from-red-600 to-pink-600 rounded-full blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
-                        <ChevronRight className="relative w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 text-white drop-shadow-2xl stroke-[2.5]" />
-                    </div>
-                </motion.button>
-
-                {/* Progress Indicators */}
-                <div className="absolute bottom-4 md:bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
-                    {heroSlides.map((_, index) => (
-                        <motion.button
-                            key={index}
-                            onClick={() => setCurrentHeroSlide(index)}
-                            whileHover={{ scale: 1.2 }}
-                            whileTap={{ scale: 0.9 }}
-                            className="relative"
+                {/* Hero Carousel */}
+                <section className="relative min-h-[600px] md:h-[600px] lg:h-[700px] overflow-hidden">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={currentHeroSlide}
+                            initial={{ opacity: 0, scale: 1.05 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                            transition={{ duration: 0.6, ease: "easeInOut" }}
+                            className={`absolute inset-0 bg-gradient-to-br ${heroSlides[currentHeroSlide].theme
+                                }`}
+                            style={{ willChange: "transform, opacity" }}
                         >
-                            <div className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${currentHeroSlide === index
-                                    ? 'bg-red-600 w-8 md:w-10'
-                                    : 'bg-white/60 hover:bg-white/80'
-                                }`} />
-                            {currentHeroSlide === index && (
-                                <motion.div
-                                    layoutId="activeSlide"
-                                    className="absolute inset-0 bg-red-600 rounded-full"
-                                    transition={{ duration: 0.3 }}
-                                />
-                            )}
-                        </motion.button>
-                    ))}
-                </div>
+                            {/* Decorative Elements with CSS animations */}
+                            <div className="absolute inset-0 overflow-hidden">
+                                <div className="absolute -top-20 -right-20 w-72 h-72 bg-red-200/10 rounded-full blur-xl animate-spin-slow" />
+                                <div className="absolute -bottom-32 -left-32 w-72 h-72 bg-amber-200/10 rounded-full blur-xl animate-spin-slow-reverse" />
+                            </div>
 
-                {/* Auto-play Progress Bar */}
-                <motion.div
-                    key={currentHeroSlide}
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: 5, ease: "linear" }}
-                    className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-red-600 to-pink-600 origin-left z-20"
-                    style={{ width: '100%' }}
-                />
-            </section>
-
-
-            {/* Categories Carousel */}
-            <section className="py-8 md:py-12 bg-white">
-                <div className="container mx-auto px-4">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="overflow-x-auto scrollbar-hide"
-                    >
-                        <div className="flex space-x-4 pb-4 min-w-max md:justify-center">
-                            {categories.map((category, index) => (
-                                <Link key={index} href={category.path}>
+                            <div className="container mx-auto px-4 md:px-8 h-full flex items-center relative z-10 py-8 md:py-0">
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center w-full">
+                                    {/* Text Content */}
                                     <motion.div
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                        className="flex flex-col items-center min-w-[90px] md:min-w-[100px] cursor-pointer group"
+                                        initial={{ x: -80, opacity: 0 }}
+                                        animate={{ x: 0, opacity: 1 }}
+                                        transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
+                                        className="space-y-4 md:space-y-6 text-center lg:text-left"
                                     >
-                                        <div className="w-16 h-16 md:w-20 md:h-20 bg-gray-100 rounded-full flex items-center justify-center mb-2 group-hover:bg-red-50 transition-colors overflow-hidden">
+                                        <motion.div
+                                            initial={{ y: 20, opacity: 0 }}
+                                            animate={{ y: 0, opacity: 1 }}
+                                            transition={{ delay: 0.4, duration: 0.6 }}
+                                        >
+                                            <h1 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+                                                <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                                                    {heroSlides[currentHeroSlide].title}
+                                                </span>
+                                            </h1>
+                                            <h2 className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mt-2 bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
+                                                {heroSlides[currentHeroSlide].subtitle}
+                                            </h2>
+                                        </motion.div>
+
+                                        <motion.p
+                                            initial={{ y: 20, opacity: 0 }}
+                                            animate={{ y: 0, opacity: 1 }}
+                                            transition={{ delay: 0.6, duration: 0.6 }}
+                                            className="text-sm md:text-base lg:text-lg text-gray-700 max-w-xl mx-auto lg:mx-0"
+                                        >
+                                            {heroSlides[currentHeroSlide].description}
+                                        </motion.p>
+
+                                        {/* Trust Indicators */}
+                                        <motion.div
+                                            initial={{ y: 20, opacity: 0 }}
+                                            animate={{ y: 0, opacity: 1 }}
+                                            transition={{ delay: 1, duration: 0.6 }}
+                                            className="flex flex-wrap gap-3 md:gap-6 justify-center lg:justify-start items-center text-xs md:text-sm text-gray-600 pt-2 md:pt-4"
+                                        >
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-green-600">✓</span>
+                                                <span>10-12 Days Shipping</span>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-green-600">✓</span>
+                                                <span>Handcrafted Quality</span>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-green-600">✓</span>
+                                                <span>100% Satisfaction</span>
+                                            </div>
+                                        </motion.div>
+                                    </motion.div>
+
+                                    {/* Image Section */}
+                                    <motion.div
+                                        initial={{ x: 80, opacity: 0, rotateY: -10 }}
+                                        animate={{ x: 0, opacity: 1, rotateY: 0 }}
+                                        transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
+                                        className="flex justify-center items-center"
+                                        style={{ willChange: "transform, opacity" }}
+                                    >
+                                        <motion.div
+                                            whileHover={{
+                                                scale: 1.03,
+                                                rotateY: 3,
+                                                rotateX: -3,
+                                            }}
+                                            transition={{ duration: 0.3 }}
+                                            className="relative w-full max-w-lg h-[250px] md:h-[350px] lg:h-[450px] rounded-3xl overflow-hidden shadow-md"
+                                            style={{ transformStyle: "preserve-3d" }}
+                                        >
+                                            <img
+                                                src={heroSlides[currentHeroSlide].image}
+                                                alt={heroSlides[currentHeroSlide].title}
+                                                className="w-full h-full object-cover"
+                                            />
+
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+
+
+
+
+                                        </motion.div>
+                                    </motion.div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </AnimatePresence>
+
+                    {/* Navigation Buttons */}
+                    <motion.button
+                        whileHover={{ scale: 1.2, x: -5 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={prevHeroSlide}
+                        className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-20 group"
+                    >
+                        <div className="relative">
+                            <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-pink-600 rounded-full blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+                            <ChevronLeft className="relative w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 text-white drop-shadow-2xl stroke-[2.5]" />
+                        </div>
+                    </motion.button>
+
+                    <motion.button
+                        whileHover={{ scale: 1.2, x: 5 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={nextHeroSlide}
+                        className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-20 group"
+                    >
+                        <div className="relative">
+                            <div className="absolute inset-0 bg-gradient-to-l from-red-600 to-pink-600 rounded-full blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+                            <ChevronRight className="relative w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 text-white drop-shadow-2xl stroke-[2.5]" />
+                        </div>
+                    </motion.button>
+
+
+
+
+
+                </section>
+
+
+                {/* Categories Carousel */}
+                <section className="py-8 md:py-12 bg-white">
+                    <div className="container mx-auto px-4">
+                        <div
+                            className="overflow-x-auto scrollbar-hide scroll-smooth scroll-pl-4 md:scroll-pl-0 scroll-snap-x scroll-snap-mandatory"
+                            style={{ WebkitOverflowScrolling: "touch" }}
+                        >
+                            <div className="flex space-x-4 pb-4 min-w-max md:justify-center">
+                                {categories.map((category, index) => (
+                                    <a
+                                        key={index}
+                                        href={category.path}
+                                        className="flex flex-col items-center min-w-[90px] md:min-w-[100px] cursor-pointer group scroll-snap-align-start"
+                                        style={{ willChange: "transform" }}
+                                    >
+                                        <div className="w-16 h-16 md:w-20 md:h-20 bg-gray-100 rounded-full flex items-center justify-center mb-2 overflow-hidden transition-colors duration-300 group-hover:bg-red-50 transform-gpu hover:scale-105 active:scale-95">
                                             <img
                                                 src={category.image}
                                                 alt={category.name}
                                                 className="w-full h-full object-cover"
+                                                loading="lazy"
+                                                decoding="async"
                                             />
                                         </div>
                                         <p className="text-xs md:text-sm text-center font-medium text-gray-700 group-hover:text-red-600 transition-colors px-1">
                                             {category.name}
                                         </p>
-                                    </motion.div>
-                                </Link>
-                            ))}
+                                    </a>
+                                ))}
+                            </div>
                         </div>
-                    </motion.div>
-                </div>
-            </section>
+                    </div>
+                </section>
 
 
 
 
-            {/* Best Sellers Carousel */}
-            {/* <section className="py-12 md:py-16 bg-gray-50">
+
+                {/* Best Sellers Carousel */}
+                {/* <section className="py-12 md:py-16 bg-gray-50">
                 <div className="container mx-auto px-4">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -925,70 +868,72 @@ const HomePage = () => {
 
 
 
-            {/* Trending This Week Section */}
-            <section className="py-12 md:py-16 bg-white">
-                <div className="container mx-auto px-4">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-center mb-8 md:mb-12"
-                    >
-                        <div className="flex items-center justify-center gap-3 mb-2">
-                            <TrendingUp className="w-8 h-8 md:w-10 md:h-10 text-red-600" />
-                            <h2 className="text-3xl md:text-4xl font-bold">TRENDING THIS WEEK</h2>
-                        </div>
-                        <div className="w-20 md:w-24 h-1 bg-red-600 mx-auto"></div>
-                    </motion.div>
+                {/* Trending This Week Section */}
+                <section className="py-12 md:py-16 bg-white">
+                    <div className="container mx-auto px-4">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-center mb-8 md:mb-12"
+                        >
+                            <div className="flex items-center justify-center gap-3 mb-2">
+                                <TrendingUp className="w-8 h-8 md:w-10 md:h-10 text-red-600" />
+                                <h2 className="text-3xl md:text-4xl font-bold">TRENDING THIS WEEK</h2>
+                            </div>
+                            <div className="w-20 md:w-24 h-1 bg-red-600 mx-auto"></div>
+                        </motion.div>
 
-                    <Carousel
-                        items={trendingProducts}
-                        renderItem={(product) => <ProductCard key={product.id} product={product} />}
-                    />
-                </div>
-            </section>
-
-
-
-            {/* Mini Books Section */}
-            <section className="py-12 md:py-16 bg-white">
-                <div className="container mx-auto px-4">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-center mb-8 md:mb-12"
-                    >
-                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 px-4">
-                            More Than a Book — It's Your Love in Pages.
-                        </h2>
-                    </motion.div>
-
-                    <Carousel
-                        items={miniBooks}
-                        renderItem={(product) => <ProductCard key={product.id} product={product} />}
-                    />
-                </div>
-                {/* <p>{product.id}</p> */}
-
-            </section>
+                        <Carousel
+                            items={trendingProducts}
+                            renderItem={(product) => <ProductCard key={product.id} product={product} />}
+                        />
+                    </div>
+                </section>
 
 
 
+                {/* Mini Books Section */}
+                <section className="py-12 md:py-16 bg-white">
+                    <div className="container mx-auto px-4">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-center mb-8 md:mb-12"
+                        >
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 px-4">
+                                More Than a Book — It's Your Love in Pages.
+                            </h2>
+                        </motion.div>
+
+                        <Carousel
+                            items={miniBooks}
+                            renderItem={(product) => <ProductCard key={product.id} product={product} />}
+                        />
+                    </div>
+                    {/* <p>{product.id}</p> */}
+
+                </section>
 
 
-            <section>
-                <GiftFinder />
-            </section>
 
 
-            <section>
-                <ShopByCategory />
-            </section>
 
-            {/* Footer */}
+                <section>
+                    <GiftFinder />
+                </section>
 
-        </div>
+
+                <section>
+                    <ShopByCategory />
+                </section>
+
+                {/* Footer */}
+
+            </div>
+
+        </>
     );
 };
 
