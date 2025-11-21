@@ -177,7 +177,7 @@ function OrderConfirmationPage() {
               Delivery Status
             </h2>
             <p className="text-gray-700 capitalize font-semibold">{orderDetails.orderStatus}</p>
-            <p className="text-sm text-gray-500 mt-1">Expected delivery in 5-7 business days</p>
+            <p className="text-sm text-gray-500 mt-1">Expected delivery in 10-12 business days</p>
           </div>
         </div>
 

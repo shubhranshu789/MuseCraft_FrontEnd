@@ -54,6 +54,7 @@ function CheckoutPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const DELIVERY_CHARGE = 80;
 
 
 
@@ -324,7 +325,7 @@ function CheckoutPage() {
   };
 
   const calculateFinalTotal = (): number => {
-    return calculateTotal() - calculateDiscount();
+    return calculateTotal() - calculateDiscount() + DELIVERY_CHARGE;
   };
 
 
@@ -944,9 +945,14 @@ function CheckoutPage() {
                     </div>
                   )}
 
-                  <div className="flex justify-between text-sm">
+                  {/* <div className="flex justify-between text-sm">
                     <span>Shipping</span>
                     <span className="text-green-600">FREE</span>
+                  </div> */}
+
+                  <div className="flex justify-between text-sm">
+                    <span>Delivery Charge</span>
+                    <span>₹{DELIVERY_CHARGE.toFixed(2)}</span>
                   </div>
 
                   <div className="flex justify-between text-lg font-bold pt-2 border-t">

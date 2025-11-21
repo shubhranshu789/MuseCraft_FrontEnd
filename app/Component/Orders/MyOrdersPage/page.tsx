@@ -119,7 +119,7 @@ export default function MyOrdersPage() {
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <div className="min-h-screen bg-gray-50 py-8 px-4">
         {/* Success Message */}
 
@@ -161,14 +161,17 @@ export default function MyOrdersPage() {
               {orders.map((order) => (
                 <div key={order.orderId} className="bg-white rounded-lg shadow-md overflow-hidden">
                   {/* Order Header */}
-                  <div className="bg-gray-50 px-6 py-4 border-b">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                      <div className="flex items-center gap-4">
+                  <div className="bg-gray-50 px-4 py-4 border-b">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-2">
+                      <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
                         <div>
                           <p className="text-sm text-gray-600">Order ID</p>
-                          <p className="font-semibold text-gray-800">{order.orderId}</p>
+                          <p className="font-semibold text-gray-800 break-all">{order.orderId}</p>
                         </div>
+
+                        {/* Divider hidden on mobile */}
                         <div className="hidden md:block w-px h-10 bg-gray-300"></div>
+
                         <div>
                           <p className="text-sm text-gray-600">Order Date</p>
                           <p className="font-semibold text-gray-800 flex items-center">
@@ -177,8 +180,11 @@ export default function MyOrdersPage() {
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getStatusColor(order.orderStatus)}`}>
+
+                      <div className="flex items-center gap-3 mt-3 md:mt-0">
+                        <span
+                          className={`px-3 py-1 rounded-full text-sm font-semibold ${getStatusColor(order.orderStatus)}`}
+                        >
                           {order.orderStatus.charAt(0).toUpperCase() + order.orderStatus.slice(1)}
                         </span>
                         <button
@@ -191,6 +197,7 @@ export default function MyOrdersPage() {
                       </div>
                     </div>
                   </div>
+
 
                   {/* Order Items */}
                   <div className="px-6 py-4">
@@ -222,7 +229,7 @@ export default function MyOrdersPage() {
                         <span className="text-sm">
                           {order.orderStatus === 'delivered'
                             ? `Delivered on ${order.deliveredAt ? formatDate(order.deliveredAt) : 'N/A'}`
-                            : 'Expected delivery in 5-7 days'}
+                            : 'Expected delivery in 10-12 days'}
                         </span>
                       </div>
                       <div className="text-right">
@@ -254,11 +261,11 @@ export default function MyOrdersPage() {
                 {/* Modal Content */}
                 <div className="p-6">
                   {/* Order Info */}
-                  <div className="mb-6">
-                    <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div className="mb-6 px-3 sm:px-0">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                       <div>
                         <p className="text-sm text-gray-600">Order ID</p>
-                        <p className="font-semibold">{selectedOrder.orderId}</p>
+                        <p className="font-semibold break-all">{selectedOrder.orderId}</p>
                       </div>
                       <div>
                         <p className="text-sm text-gray-600">Order Date</p>
@@ -266,7 +273,9 @@ export default function MyOrdersPage() {
                       </div>
                       <div>
                         <p className="text-sm text-gray-600">Status</p>
-                        <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${getStatusColor(selectedOrder.orderStatus)}`}>
+                        <span
+                          className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${getStatusColor(selectedOrder.orderStatus)}`}
+                        >
                           {selectedOrder.orderStatus.charAt(0).toUpperCase() + selectedOrder.orderStatus.slice(1)}
                         </span>
                       </div>
@@ -276,6 +285,7 @@ export default function MyOrdersPage() {
                       </div>
                     </div>
                   </div>
+
 
                   {/* Order Items */}
                   <div className="mb-6">
